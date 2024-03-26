@@ -6,7 +6,7 @@ const reservas = require("../Data/Reservas.json")
 const port = 3001;
 
 
-app.listen(port, (req, res) => {console.log("Listening in port " +port)});
+app.listen(port, (req, res) => {console.log("Listening on port " +port)});
 
 app.use(express.json());
 
@@ -28,11 +28,16 @@ app.get("/reservas",(req, res) => {
 })
 
 
-app.get("/reservas2",(req, res) => {
+app.get("/vencidas",(req, res) => {
     if(reservas.length > 0){  
-        console.log(Date.now())
-        const resultado = reservas.filter(i => fecha(i.DiaEgreso,i.MesEgreso, i.AnioEgreso)==0)
-        res.status(200).json(resultado)
+        //console.log(reservas.FechaEgreso)
+        const resultado = reservas.filter(i => fecha(i.FechaEgreso[0],i.FechaEgreso[1],i.FechaEgreso[2])==1 )
+        if(resultado.length > 0){
+            res.status(200).json(resultado);
+        }else{
+            res.status(200).json("No existen reservas vencidas");
+        }
+        
     }else{
         res.status(200).json("No existen reservas");
     }
@@ -87,14 +92,23 @@ app.post("/resHab/:id", (req, res) => {
                const dia = fecha.getDate();
                const mes = fecha.getMonth() + 1;
                const ano = fecha.getFullYear();
+               const ingreso = [dia,mes,ano];
+                 if(maxi%2==0){
+                   var egreso = [dia + data.cantDias,mes,ano];
+                 }else{
+                   var egreso = [1 + data.cantDias,mes,ano];
+                 }  
+                
                const reserva = {
                 "id": maxi,
                 "Habitacion": habitaciones[indice].id,
                 "Estrellas": habitaciones[indice].Estrellas,
                 "CantPersonas": data.CantPersonas,
-                "FechaIngreso": dia + "/" + mes + "/" + ano,
+                //"FechaIngreso": dia + "/" + mes + "/" + ano,
+                "FechaIngreso":ingreso,
                 "cantDias": data.cantDias,
-                "FechaEgreso": dia + data.cantDias + "/" + mes + "/" + ano,
+                //"FechaEgreso": dia + data.cantDias + "/" + mes + "/" + ano,
+                "FechaEgreso": egreso,
                 //"DiaEgreso":dia + data.cantDias,
                 //"MesEgreso:": mes,
                 //"AnioEgreso": ano,
@@ -150,11 +164,18 @@ app.delete("/borrar/:id", (req, res) => {
 })
 
 
-app.put("/Reserva/:id",(req, res) => {
+app.put("/reserva/:id",(req, res) => {
     const idx = req.params.id;
-
+    const data = req.body;
     const indice = reservas.findIndex(i => i.id == idx)
        if(indice >=0){
-           
+           reservas[indice].cantDias = data.cantDias;
+           reservas[indice].FechaEgreso[0] = data.FechaEgreso[0];
+           reservas[indice].FechaEgreso[1] = data.FechaEgreso[1];
+           reservas[indice].FechaEgreso[2] = data.FechaEgreso[2]
+           res.status(200).json(reservas[indice]);
+       }
+       else{
+          res.status(400).json("No existe la reserva N°" + idx);
        }
 })
