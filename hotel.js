@@ -21,7 +21,13 @@ app.get("/habitaciones", (req, res) => {
 
 app.get("/reservas",(req, res) => {
     if(reservas.length > 0){  
-        res.status(200).json(reservas)
+        const resultado = reservas.filter(i => fecha(i.FechaEgreso[0],i.FechaEgreso[1],i.FechaEgreso[2])==0 )
+        if(resultado.length > 0){
+            res.status(200).json(resultado);
+        }else{
+            res.status(200).json("No existen reservas activas");
+        }
+        
     }else{
         res.status(200).json("No existen reservas");
     }
@@ -93,11 +99,11 @@ app.post("/resHab/:id", (req, res) => {
                const mes = fecha.getMonth() + 1;
                const ano = fecha.getFullYear();
                const ingreso = [dia,mes,ano];
-                 if(maxi%2==0){
+                 //if(maxi%2==0){
                    var egreso = [dia + data.cantDias,mes,ano];
-                 }else{
-                   var egreso = [1 + data.cantDias,mes,ano];
-                 }  
+                 //}else{
+                   //var egreso = [1 + data.cantDias,mes,ano];
+                 //}  
                 
                const reserva = {
                 "id": maxi,
