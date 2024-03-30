@@ -18,6 +18,10 @@ function fecha(dia,mes,anio){
 }
 
 
+function buscaInd(base, d){
+  const indice = base.findIndex(i => i.dni == d)
+  return indice;
+}
 
 
 
@@ -26,15 +30,13 @@ function fecha(dia,mes,anio){
 
 
 function fecha2(egreso){
-    //console.log(egreso);
+    
     const fecha = new Date(egreso);
     const hoy = new Date();
     const dia = fecha.getDate();
     const mes = fecha.getMonth() + 1;
     const ano = fecha.getFullYear();
-    //const fecha2 = ano + "/" + mes + "/" + dia;
-    //console.log(fecha2);
-    //console.log(hoy);
+    
        if( fecha < hoy){return 1}
        else{
             return 0;
@@ -49,7 +51,7 @@ function fecha2(egreso){
 function acumulaDia(egreso, cant){
     const fecha = new Date(egreso);
     var dia = fecha.getDate() + cant;
-    //console.log(dia);
+    
     var mes = fecha.getMonth() + 1;
     const anio = fecha.getFullYear();   
            switch (mes){
@@ -69,7 +71,7 @@ function acumulaDia(egreso, cant){
               
               case 3:
                 if(dia > 31){ 
-                    //console.log(dia);
+                    
                     dia=dia-31;
                     mes=mes+1;  
                 }   
@@ -144,7 +146,7 @@ function acumulaDia(egreso, cant){
 
 
 
-//console.log(acumulaDia(date(),1));
 
 
-module.exports = {fecha2, acumulaDia};
+
+module.exports = {fecha2, acumulaDia, buscaInd};

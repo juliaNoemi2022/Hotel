@@ -1,2 +1,13 @@
 [
+    {
+        "id": 1,
+        "dni": 123,
+        "Habitacion": 5,
+        "Estrellas": 1,
+        "CantPersonas": 2,
+        "FechaIngreso": "2024/3/29",
+        "cantDias": 8,
+        "FechaEgreso": "2024/4/6",
+        "Precio": 80000
+    }
 ]

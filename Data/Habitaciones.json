@@ -23,7 +23,7 @@
    "Estrellas": 1,
    "CantPersonas": 2,
    "Precio": 10000,
-   "Habilitado": true},
+   "Habilitado": false},
    {"id": 6,
    "Estrellas": 1,
    "CantPersonas": 2,

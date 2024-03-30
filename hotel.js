@@ -1,10 +1,9 @@
 const express = require('express');
 const app = express();
-const productos = require("../Data/Productos.json")
-const habitaciones = require("../Data/Habitaciones.json")
-const reservas = require("../Data/Reservas.json")
+const productos = require("../src/productos.controllers")
 const funcion = require("../src/funciones")
 const reservation = require("../src/reservas.controllers")
+const cliente = require("../src/clientes.controllers")
 const port = 3001;
 
 
@@ -12,29 +11,51 @@ app.listen(port, (req, res) => {console.log("Listening on port " +port)});
 
 app.use(express.json());
 
-app.get("/productos",(req, res) => {
-    res.status(200).json(productos)
-})
+//PRODUCTOS
 
-app.get("/habitaciones", (req, res) => {
-    const resultado = habitaciones.filter(i => i.Habilitado==true);
-    res.status(200).json(resultado)
-})
+app.get("/productos",productos.totalProductos);
 
+app.get("/habitaciones",productos.totalHabitaciones );
 
-app.get("/reservas",reservation.totalReservas);
+app.post("/habitaciones", productos.crearHabitacion);
 
-app.get("/vencidas",reservation.vencidas);
-
-app.post("/crear/:id", reservation.reservarHabi);
-
-app.post("/habitaciones", reservation.crearHabitacion);
-
-
-app.delete("/borrar/:id", reservation.borrarReserva);
-
-
-app.put("/modificar/:id",reservation.modiReserva);
+app.post("/productos", productos.crearProducto);
 
 
 
+
+//RESERVAS
+
+//Reserva habitaciones:
+app.get("/reservas",reservation.totalReservasHab);
+
+app.get("/vencidas",reservation.reservasVencidasHab);
+
+app.post("/crear/:id", reservation.crearReservarHabi);
+
+
+app.delete("/borrar/:id", reservation.borrarReservaHab);
+
+
+app.put("/modificar/:id",reservation.modiReservaHab);
+
+//Reserva productos:
+app.get("/preservas", reservation.totalReservasProdu);
+
+app.get("/pvencidas", reservation.reservasVencidasProdu) 
+
+app.delete("/pborrar/:id", reservation.borrarReservaProdu);
+
+app.put("/pmodificar/:id",reservation.modiReservaProd);
+
+//CLIENTES
+
+app.get("/clientes/:dni",cliente.buscarCliente);
+
+app.get("/clientes",cliente.totalCliente);
+
+
+
+app.post("/clientes",cliente.crearCliente);
+
+app.delete("/clientes/:dni", cliente.borrarCliente);
