@@ -4,6 +4,7 @@ const productos = require("../src/productos.controllers")
 const funcion = require("../src/funciones")
 const reservation = require("../src/reservas.controllers")
 const cliente = require("../src/clientes.controllers")
+const registration = require("../src/registroHabitaciones.controllers")
 const port = 3001;
 
 
@@ -31,7 +32,7 @@ app.get("/reservas",reservation.totalReservasHab);
 
 app.get("/vencidas",reservation.reservasVencidasHab);
 
-app.post("/crear/:id", reservation.crearReservarHabi);
+app.post("/crear", reservation.crearReservarHabi);
 
 
 app.delete("/borrar/:id", reservation.borrarReservaHab);
@@ -55,7 +56,21 @@ app.get("/clientes/:dni",cliente.buscarCliente);
 app.get("/clientes",cliente.totalCliente);
 
 
-
 app.post("/clientes",cliente.crearCliente);
 
 app.delete("/clientes/:dni", cliente.borrarCliente);
+
+
+//CHECK-IN, CHECK-OUT Y REGISTRO HABITACIONES
+
+app.get("/registros",registration.totalRegistroHab);
+
+app.get("/regvencidos",registration.registrosVencidasHab);
+
+app.post("/checkin/:id", registration.check_in);
+
+app.delete("/registros/:id", registration.borrarRegistroHab);
+
+app.put("/registros/:id",registration.modiRegistroHab);
+
+app.post("/checkout/:id", registration.check_out);

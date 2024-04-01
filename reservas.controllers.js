@@ -44,7 +44,8 @@ const reservasVencidasHab = (req, res) => {
 
 const crearReservarHabi =  (req, res) => {
     const data = req.body
-    const habRes = req.params.id;
+    //const habRes = req.params.id;
+    const habRes = req.body.Habitacion;
     const indice = habitaciones.findIndex(i => i.id == habRes)
     const indni = clientes.findIndex(i => i.dni == data.dni)
     
@@ -95,8 +96,9 @@ const crearReservarHabi =  (req, res) => {
 
 
 
-const borrarReservaHab = (req, res) => {
+const borrarReservaHab = (req,res) => {
     const idx = req.params.id;
+    
     const indice = reservas.findIndex(i => i.id == idx)
        if(indice < 0){
           res.status(400).json("Reserva N°:" + idx + " no existe")
@@ -105,7 +107,7 @@ const borrarReservaHab = (req, res) => {
         const resultado = reservas.splice(indice,1);
           res.status(200).json("Se eliminó la reserva N°: " + idx);
        }   
-
+       
 
 }
 

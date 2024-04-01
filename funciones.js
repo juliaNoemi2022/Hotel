@@ -56,10 +56,19 @@ function acumulaDia(egreso, cant){
     const anio = fecha.getFullYear();   
            switch (mes){
               case 2:
-                if(dia > 28){
+                if(bisiesto(anio)==0){
+                  if(dia > 28){
                     dia=dia-28;
                     mes=mes+1;
+                  }
+                }else{
+                  if(dia > 29){
+                    dia=dia-29;
+                    mes=mes+1;
+                  }
                 }
+
+                
                 
               break;
               case 1:
@@ -146,7 +155,83 @@ function acumulaDia(egreso, cant){
 
 
 
+function bisiesto(anio){
+    if(anio%4==0 && anio%100!=0  || anio%400==0){
+        return 1;
+    }
+
+    return 0;
+}
+
+
+function CantidadDias(ingreso){
+  const fechai = new Date(ingreso);
+  var diai = fechai.getDate();
+  var mesi = fechai.getMonth() + 1;
+  var acumi = 0;
+  const anio = fechai.getFullYear();   
+       
+              
+       for(i=1; i<mesi; i++){
+          
+         switch (i){
+            case 2:
+              if(bisiesto(anio)==0){
+                acumi=acumi + 28;
+                
+              }else{
+                  acumi=acumi + 29;
+              }
+   
+            break;
+           
+            case 1:
+                 acumi = acumi + 31;
+            break;
+            
+            case 3:
+              acumi = acumi + 31;
+            break;
+            case 5:
+              acumi = acumi + 31;   
+            break;
+            case 7:
+              acumi = acumi + 31;  
+            break;
+            case 8:
+              acumi = acumi + 31; 
+            break;
+            case 10:
+              acumi = acumi + 31;
+            break;
+            case 12:
+              acumi = acumi + 31;
+            break;
+            case 4:
+              acumi = acumi + 30;
+            break;
+            case 6:
+              acumi = acumi + 30;
+            break;
+            case 9:
+              acumi = acumi + 30;
+            break;
+            case 11:
+              acumi = acumi + 30;
+            break;
+
+         }
+         
+      }   
+      
+  
+  const hoy = acumi + diai;
+return hoy;  
+
+                          
+}
 
 
 
-module.exports = {fecha2, acumulaDia, buscaInd};
+
+module.exports = {fecha2, acumulaDia, buscaInd, bisiesto, CantidadDias};
