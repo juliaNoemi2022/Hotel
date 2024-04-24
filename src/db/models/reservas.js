@@ -1,4 +1,6 @@
 'use strict';
+
+
 const {
   Model
 } = require('sequelize');
@@ -16,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   Reservas.init({
     dni: DataTypes.INTEGER,
     Habitacion: DataTypes.INTEGER,
-    Estrellas: DataTypes.INTEGER,
     CantPersonas: DataTypes.INTEGER,
     FechaIngreso: DataTypes.STRING,
     CantDias: DataTypes.INTEGER,
@@ -28,3 +29,9 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Reservas;
 };
+
+
+
+
+
+
