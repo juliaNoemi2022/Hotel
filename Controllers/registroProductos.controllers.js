@@ -1,22 +1,22 @@
 
-const productos = require("../Data/Productos.json")
-const habitaciones = require("../Data/Habitaciones.json")
-const reservas = require("../Data/Reservas.json")
+//const productos = require("../../Data/Productos.json")
+//const habitaciones = require("../../Data/Habitaciones.json")
+//const reservas = require("../../Data/Reservas.json")
 //const reservaProdu = require("../Data/Reserva productos.json")
-const registroHab = require("../Data/Registro_habitaciones.json")
+//const registroHab = require("../../Data/Registro_habitaciones.json")
 //const registroProd = require("../Data/Registro_productos.json")
-const funcion = require("../src/Helpers/funciones")
-const clientes = require("../Data/clientes.json")
+const {funcion} = require("../Helpers/funciones")
+//const clientes = require("../../Data/clientes.json")
 
 
 
-const {Reservas} = require("../src/db/models")
-const {Habitaciones} = require("../src/db/models")
-const {Clientes} = require("../src/db/models")
-const {ReservaProdus} = require("../src/db/models")
-const {RegistroProdus} = require("../src/db/models")
-const {RegistroHabi} = require("../src/db/models")
-const {Productos} = require("../src/db/models")
+const {Reservas} = require("../db/models")
+const {Habitaciones} = require("../db/models")
+const {Clientes} = require("../db/models")
+const {ReservaProdus} = require("../db/models")
+const {RegistroProdus} = require("../db/models")
+const {RegistroHabi} = require("../db/models")
+const {Productos} = require("../db/models")
 
 
 

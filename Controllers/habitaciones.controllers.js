@@ -1,9 +1,9 @@
 
 //const productos = require("../Data/Productos.json")
-const funcion = require("../src/Helpers/funciones")
-const habitaciones = require("../Data/Habitaciones.json")
+const {funcion} = require("../Helpers/funciones")
+//const habitaciones = require("../../Data/Habitaciones.json")
 
-const {Habitaciones} = require("../src/db/models")
+const {Habitaciones} = require("../db/models")
 
 
 //const totalProductos = (req, res) => {

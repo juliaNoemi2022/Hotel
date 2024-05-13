@@ -1,10 +1,10 @@
 
-const productos = require("../Data/Productos.json")
-const habitaciones = require("../Data/Habitaciones.json")
-const reservas = require("../Data/Reservas.json")
-const funcion = require("../src/Helpers/funciones")
+//const productos = require("../../Data/Productos.json")
+//const habitaciones = require("../../Data/Habitaciones.json")
+//const reservas = require("../../Data/Reservas.json")
+const {funcion} = require("../Helpers/funciones")
 //const clientes = require("../Data/clientes.json")
-const {Clientes} = require("../src/db/models")
+const {Clientes} = require("../db/models")
 
 
 

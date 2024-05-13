@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 //const productos = require("../src/productos.controllers")
-//const funcion = require("../src/funciones")
+//const funcion = require("../src/Helpers/funcionesfunciones")
 //const reservation = require("../src/reservas.controllers")
 //const cliente = require("../src/clientes.controllers")
 //const registration = require("../src/registroHabitaciones.controllers")
 //const registrationProd = require("../src/registroProductos.controllers");
+
 const RouteProdu = require("../Routes/productos.route");
 const RouteCliente = require("../Routes/clientes.route");
 const RouteReservas = require("../Routes/reservas.route"); 

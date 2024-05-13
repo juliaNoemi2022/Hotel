@@ -1,8 +1,8 @@
 
-const productos = require("../Data/Productos.json")
-const funcion = require("../src/Helpers/funciones")
+//const productos = require("../../Data/Productos.json")
+const {funcion} = require("../Helpers/funciones")
 //const habitaciones = require("../Data/Habitaciones.json")
-const {Productos} = require("../src/db/models")
+const {Productos} = require("../db/models")
 
 
 const totalProductos = async (req, res) => {

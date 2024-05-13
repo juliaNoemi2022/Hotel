@@ -1,16 +1,16 @@
 
-const productos = require("../Data/Productos.json")
-const habitaciones = require("../Data/Habitaciones.json")
-const reservas = require("../Data/Reservas.json")
+//const productos = require("../../Data/Productos.json")
+//const habitaciones = require("../../Data/Habitaciones.json")
+//const reservas = require("../../Data/Reservas.json")
 //const reservaProdu = require("../Data/Reserva productos.json")
-const funcion = require("../src/Helpers/funciones")
-const clientes = require("../Data/clientes.json")
+const {funcion} = require("../Helpers/funciones")
+//const clientes = require("../../Data/clientes.json")
 
-const {Reservas} = require("../src/db/models")
-const {Habitaciones} = require("../src/db/models")
-const {Clientes} = require("../src/db/models")
-const {ReservaProdus} = require("../src/db/models")
-const {Productos} = require("../src/db/models")
+const {Reservas} = require("../db/models")
+const {Habitaciones} = require("../db/models")
+const {Clientes} = require("../db/models")
+const {ReservaProdus} = require("../db/models")
+const {Productos} = require("../db/models")
 const { DATE, Model, Association } = require("sequelize")
 
 
