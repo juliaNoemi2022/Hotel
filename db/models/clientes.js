@@ -11,18 +11,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-        Clientes.hasOne(models.Reservas,{
-        foreignKey:"dni",
-        //sourcekey:"dni"
-    });
+        Clientes.hasMany(models.Reservas,{
+        foreignKey:'dni',
+        targetkey:'dni'  
+        });
+
+        Clientes.hasMany(models.RegistroHabi,{
+          foreignKey:'dni',
+          targetkey:'dni'  
+        });
     }
   }
   Clientes.init({
     dni: DataTypes.INTEGER,
     nombre: DataTypes.STRING,
     apellido: DataTypes.STRING,
-    tarjeta: DataTypes.INTEGER,
-    email: DataTypes.STRING
+    //fechaNacimiento: DataTypes.DATE, 
+    email: DataTypes.STRING,
+    //direccion: DataTypes.STRING,
+    //telefono: DataTypes.STRING,
+    tarjeta: DataTypes.STRING,
+    
   }, {
     sequelize,
     modelName: 'Clientes',

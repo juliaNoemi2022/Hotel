@@ -10,7 +10,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       dni: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        references:{
+          model: 'Clientes',
+          key: 'dni'
+        }
+        
       },
       Habitacion: {
         type: Sequelize.INTEGER

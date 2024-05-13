@@ -11,12 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Habitaciones.hasOne(models.Reservas,{
-        foreignKey:"Habitacion",
-    });
+      Habitaciones.hasMany(models.Reservas,{
+        foreignKey:'Habitacion',
+        targetkey: 'numero'
+       });
+
+       Habitaciones.hasMany(models.RegistroHabi,{
+        foreignKey:'Habitacion',
+        targetkey: 'numero'
+    }); 
+
+      
     }
   }
   Habitaciones.init({
+    numero: DataTypes.INTEGER,
     Estrellas: DataTypes.INTEGER,
     CantPersonas: DataTypes.INTEGER,
     Precio: DataTypes.INTEGER,
