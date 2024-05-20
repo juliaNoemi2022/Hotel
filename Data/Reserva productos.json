@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "dni": 123,
+        "idProdu": 1,
+        "CantPersonas": 2,
+        "FechaReserva": "2024/4/1",
+        "Precio": 20000
+    }
+]
