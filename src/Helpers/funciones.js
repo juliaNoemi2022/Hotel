@@ -418,6 +418,13 @@ function inicioMayorFin(inicio,fin){
 
           
 
+      function diferencia(menor, mayor){
+          const pri2 = new Date(menor);
+          const seg2 = new Date(mayor);
+          const resul = (seg2.getTime()-pri2.getTime())/(1000*60*60*24);
+             return resul;
+      }
+
 
         
         
@@ -429,4 +436,4 @@ function inicioMayorFin(inicio,fin){
              
             
 
-module.exports = {finMayorInicio,inicioMayorFin,fecha2, acumulaDia, buscaInd, bisiesto, CantidadDias, comparaRango};
+module.exports = {diferencia,finMayorInicio,inicioMayorFin,fecha2, acumulaDia, buscaInd, bisiesto, CantidadDias, comparaRango};
