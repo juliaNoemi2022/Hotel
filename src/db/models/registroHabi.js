@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
      RegistroHabi.belongsTo(models.Habitaciones,{
         foreignKey:'idHabitacion'
-        //targetkey: 'Habitacion'
+        
      });
     
      RegistroHabi.belongsTo(models.Clientes,{
       foreignKey:'idCliente'
-      //targetkey: 'dni'
+      
      });
 
     }
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     CantDias: DataTypes.INTEGER,
     FechaEgreso: DataTypes.DATE,
     Precio: DataTypes.INTEGER,
-    //checkout: DataTypes.BOOLEAN
+    
   }, {
     sequelize,
     modelName: 'RegistroHabi',

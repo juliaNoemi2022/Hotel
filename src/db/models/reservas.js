@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
      Reservas.belongsTo(models.Habitaciones,{
         foreignKey:'idHabitacion' 
-        //targetKey: 'numero'
+        
      });
     
      Reservas.belongsTo(models.Clientes,{
       foreignKey:'idCliente'
-      //targetKey:'dni'
+      
      });
 
     }

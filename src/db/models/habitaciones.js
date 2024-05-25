@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Habitaciones.hasMany(models.Reservas,{
         foreignKey:'idHabitacion'
-        //targetkey: 'numero'
+        
        });
 
        Habitaciones.hasMany(models.RegistroHabi,{
         foreignKey:'idHabitacion'
-        //targetkey: 'numero'
+        
     }); 
 
       
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     Estrellas: DataTypes.INTEGER,
     CantPersonas: DataTypes.INTEGER,
     Precio: DataTypes.INTEGER,
-    //Habilitado: DataTypes.BOOLEAN
+    
   }, {
     sequelize,
     modelName: 'Habitaciones',

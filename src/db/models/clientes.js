@@ -13,22 +13,22 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
         Clientes.hasMany(models.Reservas,{
         foreignKey:'idCliente'
-        //targetkey:'dni'  
+          
         });
 
         Clientes.hasMany(models.RegistroHabi,{
           foreignKey:'idCliente'
-          //targetkey:'dni'  
+            
         });
 
         Clientes.hasMany(models.ReservaProdus,{
           foreignKey:'idCliente'
-          //targetkey:'dni'  
+           
         });
 
         Clientes.hasMany(models.RegistroProdus,{
           foreignKey:'idCliente'
-          //targetkey:'dni'  
+          
         });
     }
   }
@@ -36,10 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     dni: DataTypes.INTEGER,
     nombre: DataTypes.STRING,
     apellido: DataTypes.STRING,
-    //fechaNacimiento: DataTypes.DATE, 
+    fechaNacimiento: DataTypes.DATE, 
     email: DataTypes.STRING,
-    //direccion: DataTypes.STRING,
-    //telefono: DataTypes.STRING,
     tarjeta: DataTypes.STRING,
     
   }, {

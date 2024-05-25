@@ -18,18 +18,27 @@ module.exports = {
       apellido: {
         type: Sequelize.STRING
       },
-      tarjeta: {
-        type: Sequelize.INTEGER
+      fechaNacimiento: {
+        type: Sequelize.DATE
       },
       email: {
         type: Sequelize.STRING
       },
+      direccion: {
+        type: Sequelize.STRING
+      },
+      telefono: {
+        type: Sequelize.STRING
+      },
+      tarjeta: {
+        type: Sequelize.STRING
+      },
       createdAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       }
     });

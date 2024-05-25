@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       RegistroProdus.belongsTo(models.Productos,{
         foreignKey:'idProdu'
-        //targetkey: 'idProdu'
+        
       });
 
       RegistroProdus.belongsTo(models.Clientes,{
         foreignKey:'idCliente'
-        //targetkey: 'idProdu'
+        
       });
     }
   }

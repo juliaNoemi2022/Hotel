@@ -13,17 +13,17 @@ module.exports = {
         type: Sequelize.STRING
       },
       Precio: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       Habilitado: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       }
     });

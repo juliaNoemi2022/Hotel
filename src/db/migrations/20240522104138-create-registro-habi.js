@@ -2,43 +2,42 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Reservas', {
+    await queryInterface.createTable('RegistroHabis', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      dni: {
+      idCliente: {
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-        references:{
-          model: 'Clientes',
-          key: 'dni'
+        references: {
+          model:'Clientes'
         }
-        
       },
-      Habitacion: {
-        type: Sequelize.INTEGER
-      },
-      Estrellas: {
-        type: Sequelize.INTEGER
+      idHabitacion: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:'Habitaciones'
+        }
       },
       CantPersonas: {
         type: Sequelize.INTEGER
       },
       FechaIngreso: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       CantDias: {
         type: Sequelize.INTEGER
       },
       FechaEgreso: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       Precio: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
+      },
+      checkout: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -51,6 +50,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reservas');
+    await queryInterface.dropTable('RegistroHabis');
   }
 };

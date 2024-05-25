@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       
      Productos.hasMany(models.ReservaProdus,{
       foreignKey:'idProdu',
-      //targetkey:"id"
+      
     });
 
     Productos.hasMany(models.RegistroProdus,{
       foreignKey:'idProdu',
-      //targetkey: 'id'
+      
     });
 
     }

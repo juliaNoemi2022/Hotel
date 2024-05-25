@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      numero: {
+        type: Sequelize.INTEGER
+      },
       Estrellas: {
         type: Sequelize.INTEGER
       },
@@ -16,17 +19,17 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       Precio: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       Habilitado: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       }
     });
