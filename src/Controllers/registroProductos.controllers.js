@@ -96,11 +96,7 @@ const check_in =  async(req, res) => {
 
     const prod = req.params.id;
     data = req.body
-    //const registrada = await ReservaProdus.findOne({where: {id:prod}})
-    
-  
-    
-    //if(registrada){    
+       
         
        
                const fecha = new Date();
@@ -127,8 +123,7 @@ const check_in =  async(req, res) => {
                
             
     
-    //}else{res.status(400).json({error:"No existe reserva id n°:" + prod})
-    //}
+    
 
     
 }

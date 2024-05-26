@@ -114,50 +114,7 @@ const crearReservarHabi =  async (req, res) => {
     const data = req.body
     const habRes = req.params.num;
     
-    //const existehabi = await Habitaciones.findOne({where: {numero:habRes}})
-
     
-    
-    
-   
-    
-     
-
-               //const fecha = new Date;
-               //const dia = fecha.getDate();
-               //const mes = fecha.getMonth() + 1;
-               //const anio = fecha.getFullYear();
-               //const hoy = anio + "-" + mes + "-" + dia;
-               
-               
-
-    //if(existehabi){
-        
-        
-        //const reservada = await Reservas.findAll({where: {idHabitacion:existehabi.id}})
-        
-        
-
-        //const registrado = await RegistroHabi.findAll({where: {idHabitacion:existehabi.id}})
-
-        
-            
-
-       //if(reservada){
-            
-       //    let resultado = reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,data.FechaEgreso,i.FechaIngreso,i.FechaEgreso)==0)
-          
-       //    let resulRegis = registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,data.FechaEgreso,i.FechaIngreso,i.FechaEgreso)==0)
-
-       
-           
-        //if(req.resultado.length == 0 && req.resulRegis.length == 0){
-          
-            //const existecli = await Clientes.findOne({where: {dni:data.dni}})
-            //if(!existecli){
-            //   res.status(400).json("Cliente N°" + data.dni +" no existe");
-            //}else{
-                //if(data.CantPersonas <= req.habi.CantPersonas){
                     res.status(200).json({mensaje:"Creada reserva habitacion N°:" + habRes });
                     
                        
@@ -172,15 +129,7 @@ const crearReservarHabi =  async (req, res) => {
                         "Precio": data.CantDias * req.habi.Precio
                     }
                     const registro = await Reservas.create(reserva);
-                //}else{res.status(400).json("Cantidad de personas supera capacidad habitacion N°:" + habRes )};
-                
-                
-                //const modi3 =  await Habitaciones.update({"Habilitado": false},{where:{Habitacion:habRes}} )
-
-            //}
-        //}else{res.status(400).json("La habitacion N°" + habRes +" ya alquilada en rango de fechas");}  
-      // }  
-    //} else{res.status(400).json("Habitacion N°" + habRes +" no existe");}         
+                        
         
 }
 
@@ -210,23 +159,18 @@ const borrarReservaHab = async (req,res) => {
 const modiReservaHab = async(req, res) => {
     const idx = req.params.id;
     const data = req.body;
-    //const indice = reservas.findIndex(i => i.id == idx)
+    
     const reservada = await Reservas.findOne({where: {id:idx}})
     
     const codCli = await Clientes.findOne({where: {dni:data.dni}})
     
-    //setTimeout(()=>{},1000);
+    
        if(reservada){
         
            if(codCli){
             const codHabi = await Habitaciones.findOne({where: {id:reservada.idHabitacion}})
                if(codHabi){
-        //const habi2 =  await Habitaciones.findOne({where: {id:data.Habitacion}})
-        //setTimeout(()=>{},1000);   
         
-        //if(habi2.Habilitado == true){
-            
-            //fecha = reservada.FechaIngreso;
             const codHabi2 = await Habitaciones.findOne({where: {numero:data.Habitacion}})
              if(data.CantPersonas<=codHabi2.CantPersonas){
 
@@ -333,33 +277,8 @@ const reservasVencidasProdu = async(req, res) => {
 
 const crearReservaProdu =  async (req, res) => {
     const data = req.body
-    //const prodRes = req.params.id;
     
-    //const existeProd = await Productos.findOne({where: {id:prodRes}})
-    
-    
-    
-    //const existecli = await Clientes.findOne({where: {dni:data.dni}})
-    
-    
-    
-    
-
-               
-               
-    
-
-
-
-       
-          //if(!existeProd){
             
-          //    res.status(400).json("Producto N°" + prodRes +" no existe");
-          //}else{
-       
-            //if(!existecli){
-            //   res.status(400).json("Cliente N°" + data.dni +" no existe");
-            //}else{
                 
                     res.status(200).json({mensaje:"Creada reserva producto N°:" + req.existeProd.id});
                     const reserva = {
@@ -371,10 +290,7 @@ const crearReservaProdu =  async (req, res) => {
                     }
                     
                     const registro = await ReservaProdus.create(reserva);
-                
-
-            //}
-          //}     
+                    
         
 }
 

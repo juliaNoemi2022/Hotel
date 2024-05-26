@@ -30,7 +30,6 @@ rutaRegistro.put("/habitaciones/:id",registration.modiRegistroHab);
 
 rutaRegistro.get("/productos/:id", middlewareProdu.existeProductoVencido,registrationProd.buscarRegistroProd);
 
-//rutaRegistro.get("/productos", middlewareProdu.existeProductoPorIdReservaProdus,registrationProd.totalRegistroProd);
 
 rutaRegistro.get("/productos", registrationProd.totalRegistroProd);
 
