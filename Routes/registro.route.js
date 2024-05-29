@@ -16,6 +16,8 @@ const middlewareProdu = require("../src/Middleware/registro.producto.middleware"
 
 rutaRegistro.get("/habitaciones",registration.totalRegistroHab);
 
+rutaRegistro.get("/habitaciones/:id",registration.buscarRegistrohab);
+
 rutaRegistro.get("/habitaciones/vencidas",registration.registrosVencidasHab);
 
 rutaRegistro.post("/habitaciones/checkin/:id",middlewareReservaHabi.existeReservaPorId,middlewareHabi.existeHabitacionPorId,registration.check_inHab);

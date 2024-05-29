@@ -35,6 +35,24 @@ const totalRegistroHab = async (req, res) => {
 
 
 
+const buscarRegistrohab = async(req, res) => {
+           
+    const habit = req.params.id;
+    const datosres = await RegistroHabi.findOne({where: {id:habit},
+        include: [{model: Clientes},{model: Habitaciones}]}
+        
+     );
+     
+     if(datosres){  
+       res.status(200).json(datosres);
+     }else{
+       res.status(400).json({error:"No existe registro id n° "+habit});
+     }
+
+}
+
+
+
 
 
 const registrosVencidasHab = async(req, res) => {
@@ -217,4 +235,4 @@ const check_outHab = async(req, res) => {
 
 
 
-module.exports = {totalRegistroHab,check_inHab, check_outHab,registrosVencidasHab, borrarRegistroHab, modiRegistroHab}
+module.exports = {buscarRegistrohab,totalRegistroHab,check_inHab, check_outHab,registrosVencidasHab, borrarRegistroHab, modiRegistroHab}
