@@ -124,17 +124,17 @@ const borrarRegistroHab = async(req, res) => {
     const habRes = req.params.id;
     
     
-    const registro = await RegistroHabi.findOne({where: {Habitacion:habRes}})
+    const registro = await RegistroHabi.findOne({where: {id:habRes}})
     
     
-    if(registro !=null){
+    if(registro){
         const registro = await RegistroHabi.destroy({where: {Habitacion:habRes}})
         res.status(200).json({mensaje:"Registro habitacion N°:" + habRes + " eliminado"});
                 
                 
              
     }
-         else{res.status(400).json({error:"La habitación N°" + habRes+" no está registrada"});}
+         else{res.status(400).json({error:"Registro id N°" + habRes+" no está registrado"});}
     
     
     
