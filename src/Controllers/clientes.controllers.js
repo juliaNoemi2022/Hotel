@@ -7,7 +7,8 @@ const {Clientes} = require("../db/models")
 
 
 const totalCliente = async (req, res) => {
-    const datoscli = await Clientes.findAll({});
+    const datoscli = await Clientes.findAll({order: [
+        ['id', 'ASC']]});
     
     if(datoscli != []){  
         res.status(200).json(datoscli);
@@ -21,15 +22,16 @@ const totalCliente = async (req, res) => {
 
 const buscarCliente =  async (req, res) => {
     
-    const idcli = req.params.dni;
-    const datoscli = await Clientes.findOne({where: {dni:idcli}})
+ 
+ const datoscli = req.existecli
+    
     
     if(datoscli != null){
         res.status(200).json(datoscli);
     }else{
-        res.status(400).json({error:"Cliente dni n° "+idcli+" no existe"});
+        res.status(400).json({error:"Cliente dni n° "+datoscli.dni+" no existe"});
     }
-    
+   
 
 }
 
@@ -60,9 +62,9 @@ const crearCliente = async (req, res) => {
 
 
 const borrarCliente = async (req, res) => {
-    const idx = req.params.dni;
     
-        const datoscli = await Clientes.findOne({where: {dni:idx}})
+        const datoscli = req.existecli;
+        const idx = datoscli.dni;
        if(datoscli == null){
           res.status(400).json({error:"Cliente dni°:" + idx + " no existe"})
        }else{
