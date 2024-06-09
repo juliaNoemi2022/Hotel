@@ -3,9 +3,9 @@ const Joi = require("joi")
 const productoSchema = Joi.object().keys(
    {
       
-      Producto: Joi.string().min(5).max(50).required().messages({
+      Producto: Joi.string().min(4).max(50).required().messages({
          "string.max": "Maximo 50 caracteres",
-         "string.min": "Minimo 5 caracteres",
+         "string.min": "Minimo 4 caracteres",
          "string.empty":"No puede ser vacio",
          "any.required":"Campo es requerido"
       }),
@@ -15,7 +15,12 @@ const productoSchema = Joi.object().keys(
         "number.min": "Min $0",
         "number.empty":"No puede ser vacio",
         "any.required":"Campo es requerido"
-     })
+     }),
+
+     Habilitado: Joi.boolean().required().messages({
+      "number.empty":"No puede ser vacio",
+      "any.required":"Campo es requerido"
+   })
 
    }
 

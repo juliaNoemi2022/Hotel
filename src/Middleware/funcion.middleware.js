@@ -20,10 +20,12 @@ const existeReservaRegistroHabitacionPorFecha=  async (req, res, next) => {
      
     if(req.reservada){
         
-        const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,data.FechaEgreso,i.FechaIngreso,i.FechaEgreso)==0)
+        const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0)
         
-        const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,data.FechaEgreso,i.FechaIngreso,i.FechaEgreso)==0)
+        const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0)
         
+        
+
         if(resultado.length == 0 && resulRegis.length == 0){
         
             req.resultado = resultado;
@@ -33,4 +35,43 @@ const existeReservaRegistroHabitacionPorFecha=  async (req, res, next) => {
    }else{return;}
 }
 
-module.exports = { existeReservaRegistroHabitacionPorFecha}
+
+const existeReservaRegistroHabitacionPorFecha2=  async (req, res, next) => {
+    const data = req.body;
+    const idx = req.params.id;
+    
+   if(req.reservada){
+       
+       const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0 && i.id != idx)
+       
+       const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0)
+       if(resultado.length == 0 && resulRegis.length == 0){
+        
+           req.resultado = resultado;
+           req.resulRegis = resulRegis;
+           next()
+     }else{return res.status(400).json({error: "La habitacion N°" + req.habi.numero +" ya alquilada en rango de fechas"})}
+  }else{return;}
+}
+
+
+const existeReservaRegistroHabitacionPorFecha3=  async (req, res, next) => {
+    const data = req.body;
+    const idx = req.params.id;
+    
+   if(req.reservada){
+       
+       const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0 )
+       
+       const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0 && i.id != idx)
+       if(resultado.length == 0 && resulRegis.length == 0){
+        
+           req.resultado = resultado;
+           req.resulRegis = resulRegis;
+           next()
+     }else{return res.status(400).json({error: "La habitacion N°" + req.habi.numero +" ya alquilada en rango de fechas"})}
+  }else{return;}
+}
+
+
+module.exports = { existeReservaRegistroHabitacionPorFecha, existeReservaRegistroHabitacionPorFecha2, existeReservaRegistroHabitacionPorFecha3}

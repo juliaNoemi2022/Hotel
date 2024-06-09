@@ -2,22 +2,20 @@
 const {Productos} = require("../db/models")
 const {RegistroProdus} = require("../db/models")
 const {ReservaProdus} = require("../db/models")
+const {Clientes} = require("../db/models")
 
 const funcion = require("../Helpers/funciones")
 
-const validarExiteClientePorDni =  async (req, res, next) => {
-    const dni = req.body.dni;
-    const cliente = await Clientes.findOne({where: {dni}, order: [
-        ['dni', 'ASC']]})
-    if(cliente){
-        return res.status(400).json({error: 'El dni ' + dni + ' ya se encuentra registrado'})
-    }
-    next()
-}
 
 
-const existeProductoPorIdReservaProdus=  async (req, res, next) => {
+
+
+const existeProductoPorIdReservaProdus =  async (req, res, next) => {
   
+    
+   
+   
+   
     const data = req.body
     const prodRes = req.params.id;
     const existeProd = await ReservaProdus.findOne({where: {id:prodRes}})
@@ -55,13 +53,44 @@ const existeProductoVencido=  async (req, res, next) => {
         }
 
     } 
-
-    
-    
 }
+    
+    const ProductoPorIdRegistroProdus =  async (req, res, next) => {
+  
+        const data = req.body
+        const prodRes = req.params.id;
+        const existeProd = await RegistroProdus.findOne({where: {id:prodRes}})
+    
+        if(!existeProd){
+            return res.status(400).json({error:"Registro id° " + prodRes +" no existe"});
+        
+        }
+            req.registrada = existeProd;
+        
+            next()
+        
+    }
+
+    const existeRegistroProduPorIdMostrar=  async (req, res, next) => {
+        const idx = req.params.id; 
+        
+        const producto = await RegistroProdus.findAll({where:{id:idx},
+            include: [{model: Productos},{model: Clientes}]})
+        
+    
+          
+       return res.status(200).json(producto);
+         
+    
+    }
+
+
+
+    
 
 
 
 
 
-module.exports = { existeProductoPorIdReservaProdus,existeProductoVencido}
+
+module.exports = { existeProductoPorIdReservaProdus,existeProductoVencido, ProductoPorIdRegistroProdus, existeRegistroProduPorIdMostrar}

@@ -37,7 +37,7 @@ const validarNoExiteClientePorDni =  async (req, res, next) => {
     req.existecli = existecli;
     next()
 
-    }catch(error){return res.status(400).json({error: 'Valor erroneo ingresado'})}
+    }catch(error){return res.status(400).json({error: 'Valor dni ingresado erroneo'})}
 }
 
 
@@ -52,7 +52,7 @@ const validarNoExiteClientePorDni2 =  async (req, res, next) => {
     req.existecli = existecli;
     next()
 
-    }catch(error){return res.status(400).json({error: 'Valor erroneo ingresado'})}
+    }catch(error){return res.status(400).json({error: 'Valor dni ingresado erroneo'})}
 }
 
 

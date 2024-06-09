@@ -48,17 +48,40 @@ function fecha2(egreso){
 }
 
 
+function hoy(dia, mes, anio){
+
+  let dia2 = dia;
+  
+  if(dia <= 9){
+    dia2 = "0"+ dia;
+  }
+
+
+  if(mes > 9){
+    let hoy = anio + "-" + mes + "-" + dia2;
+    return hoy;
+  }
+  let hoy = anio + "-" + "0"+ mes + "-" + dia2;
+    return hoy;
+}
+
+
+
+
+
 function acumulaDia(egreso, cant){
     let fecha = new Date(egreso);
-    let dia = fecha.getDate() + cant;
+    let dia = fecha.getDate()+ 1 + cant;
     
     let mes = fecha.getMonth() + 1;
     let anio = fecha.getFullYear(); 
     console.log(dia,mes,anio)
+    
        do{  
            switch (mes){
               case 2:
                 if(bisiesto(anio)==0){
+                  
                   if(dia > 28){
                     dia=dia-28;
                     mes=mes+1;
@@ -162,8 +185,12 @@ function acumulaDia(egreso, cant){
         }while(dia>31);
        
     
-    let hoy = anio + "-" + mes + "-" + dia;
-  return hoy;  
+
+       return hoy(dia, mes, anio)
+
+      
+ 
+    
 
                             
 }
@@ -377,7 +404,7 @@ function inicioMayorFin(inicio,fin){
           if(mesini>mesfin){
              return 1;
           }else{
-            //console.log(diaini,diafin)
+            
           
               if(mesini==mesfin){
                 
@@ -422,6 +449,9 @@ function inicioMayorFin(inicio,fin){
           const pri2 = new Date(menor);
           const seg2 = new Date(mayor);
           const resul = (seg2.getTime()-pri2.getTime())/(1000*60*60*24);
+            if(resul < 1){
+              return 1;
+            }
              return resul;
       }
 
@@ -436,4 +466,4 @@ function inicioMayorFin(inicio,fin){
              
             
 
-module.exports = {diferencia,finMayorInicio,inicioMayorFin,fecha2, acumulaDia, buscaInd, bisiesto, CantidadDias, comparaRango};
+module.exports = {hoy,diferencia,finMayorInicio,inicioMayorFin,fecha2, acumulaDia, buscaInd, bisiesto, CantidadDias, comparaRango};

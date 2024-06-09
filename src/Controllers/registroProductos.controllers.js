@@ -135,18 +135,15 @@ const check_in =  async(req, res) => {
 
 const borrarRegistroProd = async(req, res) => {
 
-    const idx = req.params.id;
     
-    const registrada = await RegistroProdus.findOne({where: {idProdu:idx}})
-    
-       if(!registrada){
-          res.status(400).json({error:"Registro producto N°:" + idx + " no existe"})
-       }else{
+      const registrada = req.registrada;
+      const idx = req.registrada.id
         
-        const registro = await RegistroProdus.destroy({where: {idProdu:idx}})
         
-          res.status(200).json({mensaje:"Se eliminó registro producto N°: " + idx});
-       }   
+        const registro = await RegistroProdus.destroy({where: {id:idx}})
+        
+          res.status(200).json({mensaje:"Se eliminó registro  N°: " + idx});
+      
        
 
 
@@ -155,16 +152,15 @@ const borrarRegistroProd = async(req, res) => {
 }
 
 
-const modiRegistroProd = async(req, res) => {
+const modiRegistroProd = async(req, res, next) => {
 
-    const idx = req.params.id;
+    
     const data = req.body;
     
-    const reservada = await RegistroProdus.findOne({where: {idProdu:idx}})
-
     
-       if(reservada){
-        const produ2 =  await Productos.findOne({where: {id:reservada.idProdu}})
+       const produ2 = req.existeprod;
+       const reservada = req.registrada;
+        
         
             
                const reserby = {
@@ -177,26 +173,8 @@ const modiRegistroProd = async(req, res) => {
                
                const modi3 =  await RegistroProdus.update(reserby,{where:{id:reservada.id}} )
                
+           next()
            
-           const reservada2 = await RegistroProdus.findOne({where: {idProdu:idx}})
-           res.status(200).json(reservada2);
-        
-
-       }
-       else{
-          res.status(400).json({error:"No existe el registro producto N°:" + idx});
-       }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

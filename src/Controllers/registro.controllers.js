@@ -37,18 +37,10 @@ const totalRegistroHab = async (req, res) => {
 
 const buscarRegistrohab = async(req, res) => {
            
-    const habit = req.params.id;
-    const datosres = await RegistroHabi.findOne({where: {id:habit},
-        include: [{model: Clientes},{model: Habitaciones}]}
-        
-     );
-     
-     if(datosres){  
+    
+       const datosres = req.datosres;
        res.status(200).json(datosres);
-     }else{
-       res.status(400).json({error:"No existe registro id n° "+habit});
-     }
-
+     
 }
 
 
@@ -86,7 +78,7 @@ const check_inHab =  async(req, res) => {
 
 
     
-    const habRes = req.params.id;
+    
     
       
         
@@ -98,18 +90,18 @@ const check_inHab =  async(req, res) => {
                
                 
                const registro = {
-                 "idCliente": req.reservada.idCliente,
-                 "idHabitacion": req.reservada.idHabitacion,
-                 "CantPersonas": req.reservada.CantPersonas,
+                 "idCliente": req.reservada[0].idCliente,
+                 "idHabitacion": req.reservada[0].idHabitacion,
+                 "CantPersonas": req.reservada[0].CantPersonas,
                  "FechaIngreso": `${anio}-${mes}-${dia}`,
-                 "CantDias": req.reservada.CantDias,
-                 "FechaEgreso": funcion.acumulaDia(fecha,req.reservada.CantDias), 
-                 "Precio": req.reservada.CantDias * req.habi.Precio
+                 "CantDias": req.reservada[0].CantDias,
+                 "FechaEgreso": funcion.acumulaDia(fecha,req.reservada[0].CantDias), 
+                 "Precio": req.reservada[0].CantDias * req.habi.Precio
             }
                 
-                await RegistroHabi.create(registro);
-                res.status(200).json({mensaje:"Check-in habitacion N°:" + req.reservada.idHabitacion + " generado"});
-                await Reservas.destroy({where: {id:habRes}})
+                const registroFinal = await RegistroHabi.create(registro);
+                res.status(200).json({mensaje:"Check-in id N°:" + registroFinal.id + " generado"});
+                await Reservas.destroy({where: {id:req.reservada[0].id}})
                 
            
 }
@@ -121,20 +113,16 @@ const check_inHab =  async(req, res) => {
 
 const borrarRegistroHab = async(req, res) => {
     
-    const habRes = req.params.id;
     
     
-    const registro = await RegistroHabi.findOne({where: {id:habRes}})
+    const habRes = req.datosres.id
     
-    
-    if(registro){
-        const registro = await RegistroHabi.destroy({where: {Habitacion:habRes}})
-        res.status(200).json({mensaje:"Registro habitacion N°:" + habRes + " eliminado"});
+        const registro = await RegistroHabi.destroy({where: {id:habRes}})
+        res.status(200).json({mensaje:"Registro N°:" + habRes + " eliminado"});
                 
                 
              
-    }
-         else{res.status(400).json({error:"Registro id N°" + habRes+" no está registrado"});}
+    
     
     
     
@@ -145,18 +133,17 @@ const borrarRegistroHab = async(req, res) => {
 
 
 
-const modiRegistroHab = async(req, res) => {
+const modiRegistroHab = async(req, res, next) => {
 
     const idx = req.params.id;
     const data = req.body;
     
-    const reservada = await RegistroHabi.findOne({where: {id:idx}})
     
-       if(reservada){
+    const reservada = req.datosres;
+    
+       
+        const habi2 = req.habi;
         
-        const habi2 =  await Habitaciones.findOne({where: {numero:data.Habitacion}})
-        
-        if(habi2 && habi2.CantPersonas >= data.CantPersonas){
             
             
                const reserby = {
@@ -164,64 +151,44 @@ const modiRegistroHab = async(req, res) => {
                    "idHabitacion": habi2.id,
                    
                    "CantPersonas": data.CantPersonas,
-                   "FechaIngreso": reservada.FechaIngreso,
+                   "FechaIngreso": data.FechaIngreso,
                    
                    "CantDias": data.CantDias,
                    
-                   "FechaEgreso": funcion.acumulaDia(reservada.FechaIngreso,data.CantDias),
+                   "FechaEgreso": funcion.acumulaDia(data.FechaIngreso,data.CantDias),
                    "Precio": data.CantDias * habi2.Precio
                }
                
                
                const modi3 =  await RegistroHabi.update(reserby,{where:{id:idx}} )
                
-           const reservada2 = await RegistroHabi.findOne({where: {id:idx},include: [{model: Habitaciones},{model: Clientes}]})
-           res.status(200).json(reservada2);
-        }else{
-          if(!habi2){
-            res.status(400).json({error:"No existe habitación N°:" + data.Habitacion});      
-          }else{res.status(400).json({error:"Cant. personas supera capacidad habitacion n°"+data.Habitacion});  }  
-          
-        }
-
-       }
-       else{
-          res.status(400).json({error:"No existe registro habitación N°:" + idx});
-       }
-
-
-
-    
+               next()
+               
 }
 
 
 const check_outHab = async(req, res) => {
 
     
-    const idx = req.params.id;
     
-    const registrada = await RegistroHabi.findOne({where: {id:idx}})
-    
-
-    
-    
-       if(registrada)
-       {
-        const habi = await Habitaciones.findOne({where: {id:registrada.idHabitacion}})
+               const fecha = new Date();
+               const dia = fecha.getDate();
+               const mes = fecha.getMonth() + 1;
+               const anio = fecha.getFullYear();
+               const hoy = funcion.hoy(dia, mes,anio);
+               
+        const registrada = req.datosres;
+        const habi = req.habi;      
+        const idx = req.datosres.id;  
+        const canti =  funcion.diferencia(registrada.FechaIngreso,hoy);
+        const price = canti * habi.Precio;    
         
-               
-               
-               const modi2 =  await RegistroHabi.update({"FechaEgreso": hoy, "CantDias":funcion.diferencia(registrada.FechaIngreso,hoy)} ,{where:{id:idx}} )
+               const modi2 =  await RegistroHabi.update({"FechaEgreso": hoy, "CantDias":canti, "Precio":price} ,{where:{id:idx}} )
                
                
                
-           res.status(200).json({mensaje:"Checkout realizado habitacion n°"+habi.numero}); 
-        }else{
-          
-           
-            res.status(400).json({error:"No existe registro n°"+idx}); 
-               
-        }
+           res.status(200).json({mensaje:"Checkout realizado registro n° "+idx}); 
+        
 
        
 

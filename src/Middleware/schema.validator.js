@@ -1,6 +1,7 @@
 const { error } = require("../Schemas/productos.schemas")
 
 const schemaValidator = (schema) => {
+    
     return (req, res, next) => {
         const resultado = schema.validate(req.body, {abortEarly: false})
         if(resultado.error) {
@@ -16,7 +17,7 @@ const schemaValidator = (schema) => {
                         
         }
         next()
-    }  
+    }   
 }
 
 module.exports = schemaValidator

@@ -52,29 +52,15 @@ const totalReservasHab = async (req, res) => {
 
 
 const buscarReservarHabi =  async (req, res) => {
-    const data = req.body;
-    const habRes = req.params.id;
-    
-        
-       const reservada = await Reservas.findOne({where: {id:habRes},
-           include: [{model: Clientes},{
-               model: Habitaciones,
-            }],
-       })
     
     
-    if(reservada){ 
-         
-             res.status(200).json(reservada);
-             
-    }
-    else{
-              
-            res.status(400).json({error:"La reserva n° "+habRes+" no existe"});
-        
-    }     
+    const reservada = req.reservada;
+    const habRes = req.idHabitacion;
 
         
+             res.status(200).json(reservada);
+             
+         
   
     
 }    
@@ -111,11 +97,11 @@ const reservasVencidasHab = async (req, res) => {
 
 
 const crearReservarHabi =  async (req, res) => {
-    const data = req.body
+    const data = req.body;
     const habRes = req.params.num;
     
     
-                    res.status(200).json({mensaje:"Creada reserva habitacion N°:" + habRes });
+                    
                     
                        
                    
@@ -129,7 +115,8 @@ const crearReservarHabi =  async (req, res) => {
                         "Precio": data.CantDias * req.habi.Precio
                     }
                     const registro = await Reservas.create(reserva);
-                        
+                    
+                    res.status(200).json({mensaje:"Creada reserva id N°:" + registro.id });    
         
 }
 
@@ -138,73 +125,53 @@ const crearReservarHabi =  async (req, res) => {
 
 
 
-const borrarReservaHab = async (req,res) => {
-    const idx = req.params.id;
+const borrarReservaHab = async (req, res) => {
     
-    const reservada = await Reservas.findOne({where: {id:idx}})
-    
-       if(!reservada){
-          res.status(400).json({error:"Reserva N°:" + idx + " no existe"})
-       }else{
+      
+        const reservada = req.reservada;
         
-        const registro = await Reservas.destroy({where: {id:idx}})
+
+
         
-          res.status(200).json("Se eliminó la reserva N°: " + idx);
-       }   
+        const registro = await Reservas.destroy({where: {id:reservada.id}})
+        
+          res.status(200).json({mensaje:"Se eliminó la reserva N°: " + reservada.id});
+         
        
 
 }
 
 
 const modiReservaHab = async(req, res) => {
-    const idx = req.params.id;
+    
     const data = req.body;
     
-    const reservada = await Reservas.findOne({where: {id:idx}})
     
-    const codCli = await Clientes.findOne({where: {dni:data.dni}})
-    
-    
-       if(reservada){
-        
-           if(codCli){
-            const codHabi = await Habitaciones.findOne({where: {id:reservada.idHabitacion}})
-               if(codHabi){
-        
-            const codHabi2 = await Habitaciones.findOne({where: {numero:data.Habitacion}})
-             if(data.CantPersonas<=codHabi2.CantPersonas){
 
                 
                 
-
-
+               const codCli = req.existecli;
+               const reservada = req.reservada;
+               const codHabi = req.habi;
 
                const reserby = {
                    "idCliente": codCli.id,
-                   "idHabitacion": data.Habitacion,
+                                      
+                   "CantPersonas": data.CantPersonas,
+                   "FechaIngreso": data.FechaIngreso,
                    
-                   "CantPersonas": reservada.CantPersonas,
-                   "FechaIngreso": reservada.FechaIngreso,
-                   
-                   "CantDias": reservada.CantDias,
-                   "FechaEgreso": funcion.acumulaDia(reservada.FechaIngreso,data.CantDias), 
+                   "CantDias": data.CantDias,
+                   "FechaEgreso": funcion.acumulaDia(data.FechaIngreso,data.CantDias), 
                    "Precio": data.CantDias * codHabi.Precio
                }
                
                
-               const modi3 =  Reservas.update(reserby,{where:{idHabitacion:codHabi.id}} )
+               const modi3 =  Reservas.update(reserby,{where:{id:reservada[0].id}} )
                
                
              res.status(200).json(reserby);
              
-            }else{res.status(400).json({error:"Cantidad personas excede capacidad habitacion N°:" + codHabi2.numero});}
-          
-               } else{res.status(400).json({error:"No existe habitacion N°:" + data.Habitacion});}
-           }else{res.status(400).json({error:"No existe cliente dni N°:" + data.dni});}
-       }
-       else{
-          res.status(400).json({error:"No existe la reserva N°:" + idx});
-       }
+            
 }
 
 
@@ -232,20 +199,10 @@ const totalReservasProdu = async (req, res) => {
 
 
 const buscarReservaProdu = async (req, res) => {
-        const idx = req.params.id;
-        const datosres2 = await ReservaProdus.findOne({where: {idProdu:idx},include: [{model: Productos},{model: Clientes}]})
-        
-            
-        
-        if(datosres2){  
+          const datosres2 = req.datosres2;
           res.status(200).json(datosres2);
-        }else{
-          res.status(200).json({mensaje:"No existen Reservas de Producto n°"+idx});
-        }   
-
-
-
-    
+          
+  
 }
 
 const reservasVencidasProdu = async(req, res) => {
@@ -307,18 +264,12 @@ const crearReservaProdu =  async (req, res) => {
 const borrarReservaProdu = async(req, res) => {
     
     
-    const idx = req.params.id;
     
-    const reservada = await ReservaProdus.findOne({where: {id:idx}})
+        const datosres2 = req.datosres2; 
+        const registro = await ReservaProdus.destroy({where: {id:datosres2.id}})
+        
+          res.status(200).json({mensaje:"Se eliminó la reserva N°: " + datosres2.id});
     
-       if(reservada == null){
-          res.status(400).json({error:"Reserva N°:" + idx + " no existe"})
-       }else{
-        
-        const registro = await ReservaProdus.destroy({where: {id:idx}})
-        
-          res.status(200).json({mensaje:"Se eliminó la reserva N°: " + idx});
-       }   
        
     
     }
@@ -326,22 +277,14 @@ const borrarReservaProdu = async(req, res) => {
 
 
 
-const modiReservaProd = async(req, res) => {
-    const idx = req.params.id;
+const modiReservaProd = async(req, res, next) => {
+    
     const data = req.body;
     
-    const reservada = await ReservaProdus.findOne({where: {id:idx}})
-
     
-    
-       if(reservada){
-        const codCli = await Clientes.findOne({where: {dni:data.dni}})
-        const produ2 =  await Productos.findOne({where: {id:data.idProdu}})
-        
-        
-        if(produ2.Habilitado && produ2 && codCli){
-            
-            
+            const produ2 = req.existeprod;
+            const idx = req.datosres2.id
+            const codCli = req.existecli;
                const reserby = {
                    "idProdu": produ2.id,
                    "idCliente": codCli.idCliente,
@@ -353,25 +296,8 @@ const modiReservaProd = async(req, res) => {
                
                const modi3 =  await ReservaProdus.update(reserby,{where:{id:idx}} )
                
-           const reservada = await ReservaProdus.findOne({where: {id:idx},include: [{model: Productos},{model: Clientes}]})
-           res.status(200).json(reservada);
-        }else{
-          if(!produ2){  
-            res.status(400).json({error:"Producto n°"+data.idProdu+" no existe"});
-          }   
-             if(produ2.Habilitado==false){ 
-                res.status(400).json({error:"Producto n°"+produ2.idProdu+" no habilitado"});
-             }
-                if(!codCli){ 
-                   res.status(400).json({error:"Cliente dni n°"+data.dni+" no existe"});
-                }
-        }
-
-       }
-       else{
-          res.status(400).json({error:"No existe la reserva N°:" + idx});
-       }
-
+               next()  
+           
 
     
 }

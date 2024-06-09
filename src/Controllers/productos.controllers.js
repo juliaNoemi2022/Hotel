@@ -8,8 +8,7 @@ const {Productos} = require("../db/models")
 
 
 const totalProductos = async (req, res) => {
-  const datospro = await Productos.findAll({where: {Habilitado:true}});
-  console.log(datospro); 
+  const datospro = await Productos.findAll({where: {Habilitado:true}}); 
   if(datospro.length != []){  
       res.status(200).json(datospro);
   }else{
@@ -20,6 +19,14 @@ const totalProductos = async (req, res) => {
 }
 
 
+const buscarProductos = async (req, res) => {
+    const existeprod = req.existeprod
+    if(existeprod){  
+        res.status(200).json(existeprod);
+    }
+  
+      
+  }
 
 
 
@@ -41,7 +48,20 @@ const crearProducto = async (req, res) => {
 
 
 
+const borrarProducto = async (req, res) => {
+    
+    const existeprod = req.existeprod;
+   if(existeprod){
+      const registro = await Productos.destroy({where: {id:existeprod.id}})
+      res.status(200).json({mensaje:"Se eliminó el Producto id°: " + existeprod.id});
+      
+   }
+      
+
+
+}
 
 
 
-module.exports = {totalProductos, crearProducto}
+
+module.exports = {buscarProductos,borrarProducto,totalProductos, crearProducto}
