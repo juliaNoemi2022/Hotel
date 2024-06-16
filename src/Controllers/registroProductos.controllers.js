@@ -114,9 +114,9 @@ const check_in =  async(req, res) => {
                 "FechaReserva": `${ano}-${mes}-${dia}`
             }
                 
-                await RegistroProdus.create(registro);
+                const creada = await RegistroProdus.create(registro);
                 await ReservaProdus.destroy({where: {id:req.registrada.id}})
-                res.status(200).json({mensaje:"Check-in producto N°:" + req.registrada.idProdu + " generado"});
+                res.status(200).json({mensaje:"Check-in id N°:" + creada.id + " generado"});
                 
                 
              

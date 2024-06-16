@@ -70,7 +70,8 @@ function hoy(dia, mes, anio){
 
 
 
-function acumulaDia(egreso, cant){
+function acumulaDia(egreso2, cant){
+    const egreso = egreso2.replace(/\s+/g, '');
     let fecha = new Date(egreso);
     let dia = fecha.getDate()+ 1 + cant;
     
@@ -207,7 +208,8 @@ function bisiesto(anio){
 }
 
 
-function CantidadDias(ingreso){
+function CantidadDias(ingreso2){
+  const ingreso = ingreso2.replace(/\s+/g, '');
   const fechai = new Date(ingreso);
   var diai = fechai.getDate();
   var mesi = fechai.getMonth() + 1;
@@ -339,7 +341,10 @@ function comparaFin(fin, fechaComp){
      
 }
 
-function comparaRango(inicio,fin, fechaComp){
+function comparaRango(inicio2,fin2, fechaComp2){
+  const inicio = inicio2.replace(/\s+/g, '');
+  const fin = fin2.replace(/\s+/g, '');
+  const fechaComp = fechaComp2.replace(/\s+/g, '');
   const fechaini = new Date(inicio);
   const fechafin = new Date(fin);
   const fechacomp = new Date(fechaComp);
@@ -446,7 +451,9 @@ function inicioMayorFin(inicio,fin){
 
           
 
-      function diferencia(menor, mayor){
+      function diferencia(menor2, mayor2){
+        const menor = menor2.replace(/\s+/g, '');
+        const mayor = mayor2.replace(/\s+/g, '');
           const pri2 = new Date(menor);
           const seg2 = new Date(mayor);
           const resul = (seg2.getTime()-pri2.getTime())/(1000*60*60*24);

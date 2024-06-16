@@ -103,16 +103,16 @@ const crearReservarHabi =  async (req, res) => {
     
                     
                     
-                       
+       const canty =   funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1;              
                    
                     const reserva = {
                         "idCliente": req.existecli.id,
                         "idHabitacion": req.habi.id,
                         "CantPersonas": data.CantPersonas,
                         "FechaIngreso": data.FechaIngreso,
-                        "CantDias": funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1,
+                        "CantDias": canty,
                         "FechaEgreso": data.FechaEgreso, 
-                        "Precio": funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1 * req.habi.Precio
+                        "Precio": canty * req.habi.Precio
                     }
                     const registro = await Reservas.create(reserva);
                     
@@ -154,15 +154,16 @@ const modiReservaHab = async(req, res) => {
                const reservada = req.reservada;
                const codHabi = req.habi;
 
+               const canty =   funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1;
+
                const reserby = {
                    "idCliente": codCli.id,
                                       
                    "CantPersonas": data.CantPersonas,
                    "FechaIngreso": data.FechaIngreso,
-                   
-                   "CantDias": data.CantDias,
-                   "FechaEgreso": funcion.acumulaDia(data.FechaIngreso,data.CantDias), 
-                   "Precio": data.CantDias * codHabi.Precio
+                   "CantDias": canty,
+                   "FechaEgreso": funcion.acumulaDia(data.FechaIngreso,canty-1), 
+                   "Precio": canty * codHabi.Precio
                }
                
                
@@ -237,7 +238,7 @@ const crearReservaProdu =  async (req, res) => {
     
             
                 
-                    res.status(200).json({mensaje:"Creada reserva producto N°:" + req.existeProd.id});
+                    
                     const reserva = {
                         "idProdu": req.existeProd.id,
                         "idCliente": req.existecli.id,
@@ -247,7 +248,7 @@ const crearReservaProdu =  async (req, res) => {
                     }
                     
                     const registro = await ReservaProdus.create(reserva);
-                    
+                    res.status(200).json({mensaje:"Creada reserva id N°:" + registro.id});
         
 }
 

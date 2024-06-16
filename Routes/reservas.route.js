@@ -35,7 +35,7 @@ rutaReserva.get("/habitaciones/vencidas",reservation.reservasVencidasHab);
 
 rutaReserva.get("/habitaciones/:id",schemaValidatorURL(SchemaURL),middlewareReserva.existeReservaHabitacionesVencida,middlewareReserva.existeReservaPorId ,reservation.buscarReservarHabi);
 
-rutaReserva.post("/habitaciones/:num", schemaValidatorURL(SchemaURL),schemaValidator(reservaSchema),middleware.existeHabitacionPorNumero,middlewareReserva.existeHabitacionPorIdReserva,middlewareRegistro.existeHabitacionPorIdRegistro,middlewareFuncion.existeReservaRegistroHabitacionPorFecha,middlewareCliente.validarNoExiteClientePorDni,middlewareHabi.controlCapacidadHabitacion,middlewareReserva.ReservaHabitacionesControlFechas,reservation.crearReservarHabi);
+rutaReserva.post("/habitaciones/:num", schemaValidatorURL(SchemaURL),schemaValidator(reservaSchema),middleware.existeHabitacionPorNumero,middlewareReserva.existeHabitacionPorIdReserva,middlewareRegistro.existeHabitacionPorIdRegistro,middlewareReserva.ReservaHabitacionesControlFechas,middlewareFuncion.existeReservaRegistroHabitacionPorFecha,middlewareCliente.validarNoExiteClientePorDni,middlewareHabi.controlCapacidadHabitacion,reservation.crearReservarHabi);
 
 
 
@@ -43,7 +43,7 @@ rutaReserva.delete("/habitaciones/:id",schemaValidatorURL(SchemaURL),middlewareR
 
 
 
-rutaReserva.put("/habitaciones/:id",schemaValidatorURL(SchemaURL),schemaValidator(reservaSchema),middlewareReserva.existeReservaPorId,middlewareCliente.validarNoExiteClientePorDni,middlewareHabi.existeHabitacionPorId2,middlewareHabi.controlCapacidadHabitacion,middlewareReserva.existeHabitacionPorIdReserva,middlewareRegistro.existeHabitacionPorIdRegistro,middlewareFuncion.existeReservaRegistroHabitacionPorFecha2,reservation.modiReservaHab);
+rutaReserva.put("/habitaciones/:id",schemaValidatorURL(SchemaURL),schemaValidator(reservaSchema),middlewareReserva.existeReservaPorId,middlewareCliente.validarNoExiteClientePorDni,middlewareHabi.existeHabitacionPorId2,middlewareHabi.controlCapacidadHabitacion,middlewareReserva.existeHabitacionPorIdReserva,middlewareRegistro.existeHabitacionPorIdRegistro,middlewareReserva.ReservaHabitacionesControlFechas,middlewareFuncion.existeReservaRegistroHabitacionPorFecha2,reservation.modiReservaHab);
 
 
 rutaReserva.get("/productos", reservation.totalReservasProdu);

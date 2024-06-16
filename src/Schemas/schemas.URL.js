@@ -3,8 +3,7 @@ const Joi = require("joi")
 const SchemaURL = Joi.object(
    {
       
-      dni: Joi.number().min(0).max(1000000).unsafe().messages({
-         "number.max": "N° dni erroneo",
+      dni: Joi.number().min(0).unsafe().messages({
          "number.min": "N° dni erroneo ",
          "any.required":"Campo es requerido",
          "any.unsafe": "N° dni erroneo"

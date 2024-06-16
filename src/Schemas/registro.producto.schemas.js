@@ -11,7 +11,8 @@ const reservaProductoSchema = Joi.object().keys(
       Precio: Joi.number().integer().min(10000).required().messages({
          "number.min": "Precio min 10000",
          "number.empty":"No puede ser vacio",
-         "any.required":"Campo es requerido"
+         "any.required":"Campo es requerido",
+         "number.unsafe": "Cantidad invalida"
       }),
 
           
@@ -21,7 +22,8 @@ const reservaProductoSchema = Joi.object().keys(
       "number.max": "Excede cantidad max personas",
       "number.min": "Cantidad min personas 1",
       "number.empty":"No puede ser vacio",
-      "any.required":"Campo es requerido"
+      "any.required":"Campo es requerido",
+      "number.unsafe": "Cantidad invalida"
    }),
 
    
@@ -30,7 +32,8 @@ const reservaProductoSchema = Joi.object().keys(
       "date.empty":"No puede ser vacio",
       "any.required":"Campo es requerido",
       "date.min": "Fecha ingreso minima hoy",
-      "date.base": "Fecha invalida"
+      "date.base": "Fecha invalida",
+      "date.unsafe": "Fecha invalida"
    }) 
   
    

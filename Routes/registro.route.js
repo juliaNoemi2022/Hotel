@@ -55,7 +55,7 @@ rutaRegistro.get("/productos", registrationProd.totalRegistroProd);
 
 rutaRegistro.get("/productos/vencidos", middlewareProdu.existeProductoVencido); 
 
-rutaRegistro.post("/productos/checkin/:id",schemaValidatorURL(SchemaURL),schemaValidator(registroProductosSchema),middlewareProdu.existeProductoPorIdReservaProdus ,registrationProd.check_in);
+rutaRegistro.post("/productos/checkin/:id",schemaValidatorURL(SchemaURL),middlewareProdu.existeProductoPorIdReservaProdus ,registrationProd.check_in);
 
 rutaRegistro.delete("/productos/:id", schemaValidatorURL(SchemaURL),middlewareRegistroProdu.ProductoPorIdRegistroProdus,registrationProd.borrarRegistroProd);
 

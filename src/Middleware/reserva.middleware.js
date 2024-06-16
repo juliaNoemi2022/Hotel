@@ -113,16 +113,18 @@ const existeReservaHabitacionesVencidaByID=  async (req, res, next) => {
     const data = req.body
     const prodRes = req.params.id;
 
-        const datosres = await Reservas.findAll({where:{id:prodRes}});  
+        const datosres = await Reservas.findAll({where:{id:prodRes}}); 
+         
         if(datosres.length > 0 ){  
         
             const resultado = datosres.filter(i => funcion.fecha2(i.FechaEgreso)==1 )
+            
             if(resultado.length > 0){
                 return res.status(400).json({mensaje:"Reservas N° " + prodRes+ " vencida"});
             }
-            
+          next()  
         }
-        next()
+        
    
 }
 

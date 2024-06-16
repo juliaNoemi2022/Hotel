@@ -82,28 +82,22 @@ const check_inHab =  async(req, res) => {
     
       
         
-               const fecha = new Date();
-               const dia = fecha.getDate();
-               const mes = fecha.getMonth() + 1;
-               const anio = fecha.getFullYear();
-               const canty =  funcion.diferencia(funcion.hoy(dia,mes,anio),req.reservada[0].FechaEgreso)
+               
                 
                const registro = {
                  "idCliente": req.reservada[0].idCliente,
                  "idHabitacion": req.reservada[0].idHabitacion,
                  "CantPersonas": req.reservada[0].CantPersonas,
-                 //"FechaIngreso": `${anio}-${mes}-${dia}`,
-                 "FechaIngreso": funcion.hoy(dia,mes,anio),
-                 //"CantDias": req.reservada[0].CantDias,
-                 "CantDias": canty,  
-                 //"FechaEgreso": funcion.acumulaDia(fecha,req.reservada[0].CantDias),
+                 "FechaIngreso": req.reservada[0].FechaIngreso,
+                 "CantDias": req.reservada[0].CantDias,  
                  "FechaEgreso": req.reservada[0].FechaEgreso, 
-                 "Precio": canty * req.habi.Precio
+                 "Precio": req.reservada[0].Precio
             }
             
-                //const registroFinal = await RegistroHabi.create(registro);
-                //res.status(200).json({mensaje:"Check-in id N°:" + registroFinal.id + " generado"});
-                //await Reservas.destroy({where: {id:req.reservada[0].id}})
+            
+                const registroFinal = await RegistroHabi.create(registro);
+                res.status(200).json({mensaje:"Check-in id N°:" + registroFinal.id + " generado"});
+                await Reservas.destroy({where: {id:req.reservada[0].id}})
                 
            
 }
