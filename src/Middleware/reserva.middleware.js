@@ -16,7 +16,6 @@ const existeHabitacionPorIdReserva=  async (req, res, next) => {
     if(req.habi){
         const idHabitacion = req.habi.id;
         const habitacion = await Reservas.findAll({where:{idHabitacion}})
-    
         req.reservada = habitacion;
         next()
     }else{return res.status(400).json({error: 'Habitacion id ' + idHabitacion + ' no se encuentra reservada'})}
@@ -120,7 +119,7 @@ const existeReservaHabitacionesVencidaByID=  async (req, res, next) => {
             const resultado = datosres.filter(i => funcion.fecha2(i.FechaEgreso)==1 )
             
             if(resultado.length > 0){
-                return res.status(400).json({mensaje:"Reservas N° " + prodRes+ " vencida"});
+                return res.status(400).json({mensaje:"Reservas id N° " + prodRes+ " vencida"});
             }
           next()  
         }

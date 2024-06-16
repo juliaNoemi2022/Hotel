@@ -128,7 +128,7 @@ const crearReservarHabi =  async (req, res) => {
 const borrarReservaHab = async (req, res) => {
     
       
-        const reservada = req.reservada;
+        const reservada = req.reservada[0];
         
 
 
@@ -145,14 +145,16 @@ const borrarReservaHab = async (req, res) => {
 const modiReservaHab = async(req, res) => {
     
     const data = req.body;
-    
+    const codigo = req.params.id
     
 
                 
                 
                const codCli = req.existecli;
-               const reservada = req.reservada;
+               const reservada3 = req.reservada.filter(i=>i.id==codigo);
                const codHabi = req.habi;
+               
+               
 
                const canty =   funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1;
 
@@ -167,10 +169,10 @@ const modiReservaHab = async(req, res) => {
                }
                
                
-               const modi3 =  Reservas.update(reserby,{where:{id:reservada[0].id}} )
+               const modi3 =  Reservas.update(reserby,{where:{id:reservada3[0].id}} )
                
                
-             res.status(200).json(reserby);
+               res.status(200).json(reserby);
              
             
 }
@@ -265,7 +267,7 @@ const crearReservaProdu =  async (req, res) => {
 const borrarReservaProdu = async(req, res) => {
     
     
-    
+       
         const datosres2 = req.datosres2; 
         const registro = await ReservaProdus.destroy({where: {id:datosres2.id}})
         
@@ -291,7 +293,7 @@ const modiReservaProd = async(req, res, next) => {
                    "idCliente": codCli.idCliente,
                    "Precio": produ2.Precio*data.CantPersonas,
                    "CantPersonas": data.CantPersonas,
-                   "FechaReserva": funcion.acumulaDia(data.FechaReserva,0)
+                   "FechaReserva": funcion.acumulaDia(data.FechaReserva,1)
                    
                }
                

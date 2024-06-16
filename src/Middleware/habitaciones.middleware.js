@@ -36,6 +36,7 @@ const existeHabitacionPorId=  async (req, res, next) => {
 const existeHabitacionPorId2=  async (req, res, next) => {
     
     const idx = req.reservada[0].idHabitacion;
+    
     const habi = await Habitaciones.findOne({where: {id:idx}})
     if(!habi){
         return res.status(400).json({error: 'Habitacion id ' + idx + ' no existe'})

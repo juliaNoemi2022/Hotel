@@ -6,6 +6,8 @@ const rutaRegistro = express.Router();
 const registration = require("../src/Controllers/registro.controllers")
 const registrationProd = require("../src/Controllers/registroProductos.controllers")
 
+
+
 const middlewareReservaHabi = require("../src/Middleware/reserva.middleware")
 
 const middlewareHabi = require("../src/Middleware/habitaciones.middleware")
@@ -17,6 +19,8 @@ const middlewareRegistroHabi = require("../src/Middleware/registro.middleware")
 const middlewareRegistroProdu = require("../src/Middleware/registro.producto.middleware")
 
 const middlewareProductos = require("../src/Middleware/productos.middleware")
+
+const middlewareReservaProdu = require("../src/Middleware/reserva.producto.middleware")
 
 
 const middlewareFuncion = require("../src/Middleware/funcion.middleware")
@@ -55,7 +59,9 @@ rutaRegistro.get("/productos", registrationProd.totalRegistroProd);
 
 rutaRegistro.get("/productos/vencidos", middlewareProdu.existeProductoVencido); 
 
-rutaRegistro.post("/productos/checkin/:id",schemaValidatorURL(SchemaURL),middlewareProdu.existeProductoPorIdReservaProdus ,registrationProd.check_in);
+rutaRegistro.post("/productos/checkin/:id",schemaValidatorURL(SchemaURL),middlewareProdu.existeProductoPorIdReservaProdus,middlewareReservaProdu.existeReservaProductosVencidoByID ,registrationProd.check_in);
+//rutaRegistro.post("/productos/checkin/:id",schemaValidatorURL(SchemaURL),middlewareReservaProdu.existeReservaProductosVencidoByID,middlewareProdu.existeProductoPorIdReservaProdus ,registrationProd.check_in);
+
 
 rutaRegistro.delete("/productos/:id", schemaValidatorURL(SchemaURL),middlewareRegistroProdu.ProductoPorIdRegistroProdus,registrationProd.borrarRegistroProd);
 

@@ -2,7 +2,7 @@ const Joi = require("joi")
 const funcion = require("../Helpers/funciones")
 
     const fecha = new Date();
-    let dia = fecha.getDate()-1;
+    let dia = fecha.getDate();
     let mes = fecha.getMonth()+1;
     let anio = fecha.getFullYear();
 

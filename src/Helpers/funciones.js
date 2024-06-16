@@ -73,11 +73,11 @@ function hoy(dia, mes, anio){
 function acumulaDia(egreso2, cant){
     const egreso = egreso2.replace(/\s+/g, '');
     let fecha = new Date(egreso);
-    let dia = fecha.getDate()+ 1 + cant;
+    let dia = fecha.getDate() + cant;
     
     let mes = fecha.getMonth() + 1;
     let anio = fecha.getFullYear(); 
-    console.log(dia,mes,anio)
+    
     
        do{  
            switch (mes){
@@ -186,7 +186,7 @@ function acumulaDia(egreso2, cant){
             }
         }while(dia>31);
        
-    
+       console.log(cant) 
 
        return hoy(dia, mes, anio)
 
