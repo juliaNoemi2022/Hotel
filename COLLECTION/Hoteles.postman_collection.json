@@ -586,6 +586,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ListarReservasProductosByID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"CantPersonas\": 3,\r\n        \"FechaIngreso\": \"2024-05-17\",\r\n        \"CantDias\": 10,\r\n        \"FechaEgreso\": \"2024-05-25\",\r\n        \"Precio\": 200000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/Reservas/Productos/17",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"Reservas",
+								"Productos",
+								"17"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -929,7 +961,37 @@
 					"response": []
 				},
 				{
-					"name": "ListarReservasProductosVencidas",
+					"name": "CheckInRegistrosProductosByID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"CantPersonas\": 3,\r\n        \"FechaIngreso\": \"2024-05-17\",\r\n        \"CantDias\": 10,\r\n        \"FechaEgreso\": \"2024-05-25\",\r\n        \"Precio\": 200000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/Registros/Productos/checkin/14",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"Registros",
+								"Productos",
+								"checkin",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarRegistrosProductosByID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -946,15 +1008,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/Reservas/Productos/vencidas",
+							"raw": "localhost:3001/Registros/Productos/7",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
-								"Reservas",
+								"Registros",
 								"Productos",
-								"vencidas"
+								"7"
 							]
 						}
 					},
