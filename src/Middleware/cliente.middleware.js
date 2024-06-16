@@ -2,8 +2,9 @@ const { number } = require("joi");
 const {Clientes} = require("../db/models")
 
 const validarExiteClientePorDni =  async (req, res, next) => {
-    const dni = req.body.dni;
  try{   
+    const dni = req.body.dni;
+    
     const cliente = await Clientes.findOne({where: {dni}, order: [
         ['dni', 'ASC']]})
     if(cliente){
@@ -15,20 +16,21 @@ const validarExiteClientePorDni =  async (req, res, next) => {
 
 
 const existeClientePorId=  async (req, res, next) => {
-    const id = req.params.id;    
+    const id = req.params.id; 
+try{       
     const cliente = await Clientes.findByPk(id)
     if(!cliente){
         return res.status(400).json({error: 'El id ' + id + ' no se encuentra registrado'})
     }
     next()
- 
+}catch(error){return res.status(400).json({error: 'Valor ingresado erroneo'})}
 }
 
 
 
 const validarNoExiteClientePorDni =  async (req, res, next) => {
-    const dni = req.body.dni;  
- try{   
+ //try{   
+    const dni = req.body.dni;    
     const existecli = await Clientes.findOne({where: {dni}, order: [
         ['dni', 'ASC']]})
     if(!existecli){
@@ -37,13 +39,13 @@ const validarNoExiteClientePorDni =  async (req, res, next) => {
     req.existecli = existecli;
     next()
 
-    }catch(error){return res.status(400).json({error: 'Valor dni ingresado erroneo'})}
+//    }catch(error){return res.status(400).json({error: 'Valor dni ingresado erroneo'})}
 }
 
 
 const validarNoExiteClientePorDni2 =  async (req, res, next) => {
     const dni = req.params.dni;  
- try{   
+ //try{   
     const existecli = await Clientes.findOne({where: {dni}, order: [
         ['dni', 'ASC']]})
     if(!existecli){
@@ -52,7 +54,7 @@ const validarNoExiteClientePorDni2 =  async (req, res, next) => {
     req.existecli = existecli;
     next()
 
-    }catch(error){return res.status(400).json({error: 'Valor dni ingresado erroneo'})}
+ //   }catch(error){return res.status(400).json({error: 'Valor dni ingresado erroneo'})}
 }
 
 

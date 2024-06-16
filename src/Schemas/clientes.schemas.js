@@ -1,5 +1,8 @@
 const Joi = require("joi")
 
+
+
+
 const clienteSchema = Joi.object().keys(
    {
       
@@ -21,10 +24,11 @@ const clienteSchema = Joi.object().keys(
       "any.required":"Campo es requerido"
      }),
 
-   fechaNacimiento: Joi.date().max('now').required().messages({
+   fechaNacimiento: Joi.date().max('now').required().valid().messages({
       "date.max": "Fecha erronea",
       "date.empty":"No puede ser vacio",
-      "any.required":"Campo es requerido"
+      "any.required":"Campo es requerido",
+      "date.base": "Fecha invalida"
    }),
    
    tarjeta: Joi.number().integer().required().messages({

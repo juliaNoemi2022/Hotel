@@ -110,9 +110,9 @@ const crearReservarHabi =  async (req, res) => {
                         "idHabitacion": req.habi.id,
                         "CantPersonas": data.CantPersonas,
                         "FechaIngreso": data.FechaIngreso,
-                        "CantDias": funcion.diferencia(data.FechaIngreso,data.FechaEgreso),
+                        "CantDias": funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1,
                         "FechaEgreso": data.FechaEgreso, 
-                        "Precio": data.CantDias * req.habi.Precio
+                        "Precio": funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1 * req.habi.Precio
                     }
                     const registro = await Reservas.create(reserva);
                     

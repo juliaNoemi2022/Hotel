@@ -2,12 +2,12 @@ const { Json } = require("sequelize/lib/utils")
 const { error } = require("../Schemas/productos.schemas")
 const { json } = require("sequelize")
 
-const schemaValidator = (schema) => {
+const schemaValidatorURL = (schema) => {
 
     return (req, res, next) => {
-        const resultado = schema.validate(req.body, {abortEarly: false})
-        
+        const resultado = schema.validate(req.params, {abortEarly: false})
         if(resultado.error) {
+            //return res.status(400).json({error:"DNI erroneo"});
            return res.status(400).json({
             //errores: resultado.error.details,
             errores: resultado.error.details.map(error => ({
@@ -22,6 +22,7 @@ const schemaValidator = (schema) => {
         next()
     }  
 
+
 }
 
-module.exports = schemaValidator
+module.exports = schemaValidatorURL

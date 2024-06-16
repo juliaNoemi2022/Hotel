@@ -107,6 +107,46 @@ const existeReservaHabitacionesVencida=  async (req, res, next) => {
 }
 
 
+
+const existeReservaHabitacionesVencidaByID=  async (req, res, next) => {
+  
+    const data = req.body
+    const prodRes = req.params.id;
+
+        const datosres = await Reservas.findAll({where:{id:prodRes}});  
+        if(datosres.length > 0 ){  
+        
+            const resultado = datosres.filter(i => funcion.fecha2(i.FechaEgreso)==1 )
+            if(resultado.length > 0){
+                return res.status(400).json({mensaje:"Reservas N° " + prodRes+ " vencida"});
+            }
+            
+        }
+        next()
+   
+}
+
+
+const ReservaHabitacionesControlFechas=  async (req, res, next) => {
+  
+    const data = req.body
+    
+    
+       
+       if((funcion.diferencia(data.FechaIngreso,data.FechaEgreso))<0)
+       {
+        return res.status(400).json({error:"Fecha ingreso mayor a fecha egreso "});
+
+       } 
+          next()
+
+
+        
+   
+}
+
+
+
 const existeReservaProductoVencida=  async (req, res, next) => {
   
     const data = req.body
@@ -135,4 +175,4 @@ const existeReservaProductoVencida=  async (req, res, next) => {
 
 
 
-module.exports = { existeReservaProductoPorId,existeReservaPorId2,existeHabitacionPorIdReserva, existeReservaPorId,existeReservaProduPorIdMostrar, existeReservaHabitacionesVencida, existeReservaProductoVencida}
+module.exports = { ReservaHabitacionesControlFechas,existeReservaHabitacionesVencidaByID,existeReservaProductoPorId,existeReservaPorId2,existeHabitacionPorIdReserva, existeReservaPorId,existeReservaProduPorIdMostrar, existeReservaHabitacionesVencida, existeReservaProductoVencida}

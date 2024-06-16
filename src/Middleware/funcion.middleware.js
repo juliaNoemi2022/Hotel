@@ -20,14 +20,13 @@ const existeReservaRegistroHabitacionPorFecha=  async (req, res, next) => {
      
     if(req.reservada){
         
-        const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0)
+        const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,funcion.diferencia(data.FechaIngreso,data.FechaEgreso)),i.FechaIngreso,i.FechaEgreso)==0)
         
-        const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0)
+        const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,funcion.diferencia(data.FechaIngreso,data.FechaEgreso)),i.FechaIngreso,i.FechaEgreso)==0)
         
         
-
         if(resultado.length == 0 && resulRegis.length == 0){
-        
+            
             req.resultado = resultado;
             req.resulRegis = resulRegis;
             next()
@@ -42,9 +41,9 @@ const existeReservaRegistroHabitacionPorFecha2=  async (req, res, next) => {
     
    if(req.reservada){
        
-       const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0 && i.id != idx)
+       const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,funcion.diferencia(data.FechaIngreso,data.FechaEgreso)),i.FechaIngreso,i.FechaEgreso)==0 && i.id != idx)
        
-       const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0)
+       const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,funcion.diferencia(data.FechaIngreso,data.FechaEgreso)),i.FechaIngreso,i.FechaEgreso)==0)
        if(resultado.length == 0 && resulRegis.length == 0){
         
            req.resultado = resultado;
@@ -61,9 +60,9 @@ const existeReservaRegistroHabitacionPorFecha3=  async (req, res, next) => {
     
    if(req.reservada){
        
-       const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0 )
+       const resultado = req.reservada.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,diferencia(data.FechaIngreso,data.FechaEgreso)),i.FechaIngreso,i.FechaEgreso)==0 )
        
-       const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,data.CantDias),i.FechaIngreso,i.FechaEgreso)==0 && i.id != idx)
+       const resulRegis = req.registrado.filter(i => funcion.finMayorInicio(data.FechaIngreso,funcion.acumulaDia(data.FechaIngreso,diferencia(data.FechaIngreso,data.FechaEgreso)),i.FechaIngreso,i.FechaEgreso)==0 && i.id != idx)
        if(resultado.length == 0 && resulRegis.length == 0){
         
            req.resultado = resultado;

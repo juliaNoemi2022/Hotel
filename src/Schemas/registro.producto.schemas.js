@@ -1,5 +1,10 @@
 const Joi = require("joi")
 
+    const fecha = new Date();
+    let dia = fecha.getDate()-1;
+    let mes = fecha.getMonth()+1;
+    let anio = fecha.getFullYear();
+
 const reservaProductoSchema = Joi.object().keys(
    {
       
@@ -13,7 +18,7 @@ const reservaProductoSchema = Joi.object().keys(
 
 
    CantPersonas: Joi.number().integer().min(1).max(10).required().messages({
-      "number.max": "Cantidad max personas 10",
+      "number.max": "Excede cantidad max personas",
       "number.min": "Cantidad min personas 1",
       "number.empty":"No puede ser vacio",
       "any.required":"Campo es requerido"
@@ -21,9 +26,11 @@ const reservaProductoSchema = Joi.object().keys(
 
    
 
-   FechaReserva: Joi.date().required().messages({
+   FechaReserva: Joi.date().required().min(''+anio+'-'+mes+'-'+dia+'').valid().messages({
       "date.empty":"No puede ser vacio",
-      "any.required":"Campo es requerido"
+      "any.required":"Campo es requerido",
+      "date.min": "Fecha ingreso minima hoy",
+      "date.base": "Fecha invalida"
    }) 
   
    

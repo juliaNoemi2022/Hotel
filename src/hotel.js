@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
 
@@ -13,9 +14,24 @@ const RouteRegistro = require("../Routes/registro.route")
 const port = 3001;
 
 
+//const bodyParser = require('body-parser');
+
+
+
+
+
+
+
+
+
 app.listen(port, (req, res) => {console.log("Listening on port " +port)});
 
-app.use(express.json());
+//app.use(express.json());
+app.use(bodyParser.json());
+
+
+
+
 
 app.use("/productos", RouteProdu.rutaProducto)
 app.use("/habitaciones",RouteHabitacion.rutaHabitacion)

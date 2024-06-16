@@ -26,7 +26,7 @@ const habitacionSchema = Joi.object().keys(
 
 
    CantPersonas: Joi.number().integer().min(1).max(10).required().messages({
-      "number.max": "Cantidad max personas 10",
+      "number.max": "Excede cantidad max personas",
       "number.min": "Cantidad min personas 1",
       "number.empty":"No puede ser vacio",
       "any.required":"Campo es requerido"

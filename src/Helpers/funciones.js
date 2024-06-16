@@ -1,3 +1,4 @@
+const { INTEGER } = require("sequelize");
 
 
 
@@ -449,14 +450,15 @@ function inicioMayorFin(inicio,fin){
           const pri2 = new Date(menor);
           const seg2 = new Date(mayor);
           const resul = (seg2.getTime()-pri2.getTime())/(1000*60*60*24);
-            if(resul < 1){
+          
+            if(resul >= 0 && resul < 1){
               return 1;
             }
-             return resul;
+             return  Math.round(resul);
       }
 
 
-        
+      
         
 
             
