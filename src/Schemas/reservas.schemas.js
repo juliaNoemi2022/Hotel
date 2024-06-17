@@ -13,9 +13,9 @@ const reservaSchema = Joi.object().keys(
          "number.min": "Precio min 10000",
          "number.empty":"No puede ser vacio",
          "any.required":"Campo es requerido",
-         "number.unsafe": "Cantidad invalida"
+         "number.unsafe": "Cantidad invalida",
+         "number.base": "Debe ser numero"
       }),
-
           
 
 
@@ -24,13 +24,15 @@ const reservaSchema = Joi.object().keys(
       "number.min": "Cantidad min personas 1",
       "number.empty":"No puede ser vacio",
       "any.required":"Campo es requerido",
-      "number.unsafe": "Cantidad invalida"
+      "number.unsafe": "Cantidad invalida",
+      "number.base": "Debe ser numero"
    }),
 
    CantDias: Joi.number().integer().min(1).messages({
       "number.min": "Cantidad min dias 1",
       "number.empty":"No puede ser vacio",
-      "number.unsafe": "Cantidad invalida"
+      "number.unsafe": "Cantidad invalida",
+      "number.base": "Debe ser numero"
    }),
 
    FechaIngreso: Joi.date().required().min(''+anio+'-'+mes+'-'+dia+'').valid().messages({
@@ -52,7 +54,8 @@ const reservaSchema = Joi.object().keys(
    dni: Joi.number().integer().required().messages({
       "number.empty":"No puede ser vacio",
       "any.required":"Campo es requerido",
-      "number.unsafe": "dni invalido"
+      "number.unsafe": "dni invalido",
+      "number.base": "Debe ser numero",
    }),
 
 }

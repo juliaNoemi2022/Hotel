@@ -42,7 +42,7 @@ rutaReserva.post("/habitaciones/:num", schemaValidatorURL(SchemaURL),schemaValid
 rutaReserva.delete("/habitaciones/:id",schemaValidatorURL(SchemaURL),middlewareReserva.existeReservaPorId ,reservation.borrarReservaHab);
 
 
-//rutaReserva.put("/habitaciones/:id",schemaValidatorURL(SchemaURL),schemaValidator(reservaSchema),middlewareReserva.existeReservaPorId,middlewareCliente.validarNoExiteClientePorDni,middlewareHabi.existeHabitacionPorId2,middlewareHabi.controlCapacidadHabitacion,middlewareRegistro.existeHabitacionPorIdRegistro,middlewareReserva.ReservaHabitacionesControlFechas,middlewareFuncion.existeReservaRegistroHabitacionPorFecha2,reservation.modiReservaHab);
+
 rutaReserva.put("/habitaciones/:id",schemaValidatorURL(SchemaURL),schemaValidator(reservaSchema),middlewareReserva.existeReservaPorId,middlewareCliente.validarNoExiteClientePorDni,middlewareHabi.existeHabitacionPorId2,middlewareHabi.controlCapacidadHabitacion,middlewareReserva.existeHabitacionPorIdReserva,middlewareRegistro.existeHabitacionPorIdRegistro,middlewareReserva.ReservaHabitacionesControlFechas,middlewareFuncion.existeReservaRegistroHabitacionPorFecha2,reservation.modiReservaHab);
 
 
