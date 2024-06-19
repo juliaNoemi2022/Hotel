@@ -61,7 +61,8 @@ const existeReservaProductoPorId=  async (req, res, next) => {
         if(!datosres2){  
           return res.status(200).json({mensaje:"No existen Reservas n°"+idx});
         }   
-       req.datosres2 = datosres2;
+        
+        req.datosres2 = datosres2;
        next()
 }
 
@@ -152,7 +153,7 @@ const existeReservaProductoVencida=  async (req, res, next) => {
   
     const data = req.body
     const prodRes = req.params.id;
-    return res.status(200).json("PUTO"+prodRes)
+    
     if(prodRes != "vencidas"){
           next()
     }else{

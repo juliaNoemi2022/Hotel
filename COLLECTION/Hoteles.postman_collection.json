@@ -399,14 +399,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/Reservas/habitaciones/vencidas",
+							"raw": "localhost:3001/Reservas/Habitaciones/vencidas",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"Reservas",
-								"habitaciones",
+								"Habitaciones",
 								"vencidas"
 							]
 						}
@@ -614,6 +614,38 @@
 								"Reservas",
 								"Productos",
 								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarReservasHabitacionesVencidas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"CantPersonas\": 3,\r\n        \"FechaIngreso\": \"2024-05-17\",\r\n        \"CantDias\": 10,\r\n        \"FechaEgreso\": \"2024-05-25\",\r\n        \"Precio\": 200000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/Reservas/Habitaciones/vencidas",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"Reservas",
+								"Habitaciones",
+								"vencidas"
 							]
 						}
 					},
@@ -891,70 +923,6 @@
 								"Registros",
 								"productos",
 								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ListarRegistrosProductosVencidos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \"dni\":999999,\r\n        \"CantPersonas\": 5,\r\n        \"FechaIngreso\": \"2024-05-17\",\r\n        \"CantDias\": 7,\r\n        \"FechaEgreso\": \"2024-05-25\",\r\n        \"FechaReserva\": \"2024-02-29\",\r\n        \"Precio\": 200000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3001/Registros/productos/vencidos",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"Registros",
-								"productos",
-								"vencidos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ListarRegistrosHabitacionesVencidos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \"dni\":999999,\r\n        \"CantPersonas\": 5,\r\n        \"FechaIngreso\": \"2024-05-17\",\r\n        \"CantDias\": 7,\r\n        \"FechaEgreso\": \"2024-05-25\",\r\n        \"FechaReserva\": \"2024-02-29\",\r\n        \"Precio\": 200000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3001/Registros/habitaciones/vencidos",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"Registros",
-								"habitaciones",
-								"vencidos"
 							]
 						}
 					},

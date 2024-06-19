@@ -50,6 +50,7 @@ rutaReserva.get("/productos", reservation.totalReservasProdu);
 
 rutaReserva.get("/productos/:id",schemaValidatorURL(SchemaURL),middlewareReserva.existeReservaProductoVencida,middlewareReserva.existeReservaProductoPorId ,reservation.buscarReservaProdu);
 
+
 rutaReserva.post("/productos/:id",schemaValidatorURL(SchemaURL),schemaValidator(reservaProductoSchema),middlewareReservaProdu.existeProductoPorId,middlewareCliente.validarNoExiteClientePorDni,reservation.crearReservaProdu);
 
 rutaReserva.get("/productos/vencidas", reservation.reservasVencidasProdu) 

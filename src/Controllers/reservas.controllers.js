@@ -157,14 +157,14 @@ const modiReservaHab = async(req, res) => {
                
 
                const canty =   funcion.diferencia(data.FechaIngreso,data.FechaEgreso)+1;
-
+               
                const reserby = {
                    "idCliente": codCli.id,
                                       
                    "CantPersonas": data.CantPersonas,
                    "FechaIngreso": data.FechaIngreso,
                    "CantDias": canty,
-                   "FechaEgreso": funcion.acumulaDia(data.FechaIngreso,canty-1), 
+                   "FechaEgreso": funcion.acumulaDia(data.FechaIngreso,canty), 
                    "Precio": canty * codHabi.Precio
                }
                
@@ -205,7 +205,7 @@ const buscarReservaProdu = async (req, res) => {
           const datosres2 = req.datosres2;
           res.status(200).json(datosres2);
           
-  
+          
 }
 
 const reservasVencidasProdu = async(req, res) => {
