@@ -40,7 +40,7 @@ rutaRegistro.get("/habitaciones/vencidos",registration.registrosVencidasHab);
 
 rutaRegistro.post("/habitaciones/checkin/:id",schemaValidatorURL(SchemaURL),middlewareReservaHabi.existeReservaPorId,middlewareHabi.existeHabitacionPorId2,middlewareReservaHabi.existeReservaHabitacionesVencidaByID,registration.check_inHab);
 
-rutaRegistro.put("/habitaciones/checkout/:id", schemaValidatorURL(SchemaURL),schemaValidator(registroHabitacionesSchema),middlewareRegistroHabi.existeRegistrohabByID,middlewareHabi.existeHabitacionPorId3,registration.check_outHab);
+rutaRegistro.put("/habitaciones/checkout/:id", schemaValidatorURL(SchemaURL),middlewareRegistroHabi.existeRegistrohabByID,middlewareHabi.existeHabitacionPorId3,middlewareRegistroHabi.RegistroHabitacionesControlFechas,registration.check_outHab);
 
 
 rutaRegistro.delete("/habitaciones/:id", schemaValidatorURL(SchemaURL),middlewareRegistroHabi.existeRegistrohabByID,registration.borrarRegistroHab);
@@ -60,7 +60,7 @@ rutaRegistro.get("/productos", registrationProd.totalRegistroProd);
 rutaRegistro.get("/productos/vencidos", middlewareProdu.existeProductoVencido); 
 
 rutaRegistro.post("/productos/checkin/:id",schemaValidatorURL(SchemaURL),middlewareProdu.existeProductoPorIdReservaProdus,middlewareReservaProdu.existeReservaProductosVencidoByID ,registrationProd.check_in);
-//rutaRegistro.post("/productos/checkin/:id",schemaValidatorURL(SchemaURL),middlewareReservaProdu.existeReservaProductosVencidoByID,middlewareProdu.existeProductoPorIdReservaProdus ,registrationProd.check_in);
+
 
 
 rutaRegistro.delete("/productos/:id", schemaValidatorURL(SchemaURL),middlewareRegistroProdu.ProductoPorIdRegistroProdus,registrationProd.borrarRegistroProd);

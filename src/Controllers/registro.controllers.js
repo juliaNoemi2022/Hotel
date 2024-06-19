@@ -176,7 +176,7 @@ const check_outHab = async(req, res) => {
         const registrada = req.datosres;
         const habi = req.habi;      
         const idx = req.datosres.id;  
-        const canti =  funcion.diferencia(registrada.FechaIngreso,hoy);
+        const canti =  funcion.diferencia(registrada.FechaIngreso,hoy)+1;
         const price = canti * habi.Precio;    
         
                const modi2 =  await RegistroHabi.update({"FechaEgreso": hoy, "CantDias":canti, "Precio":price} ,{where:{id:idx}} )

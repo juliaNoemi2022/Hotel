@@ -86,5 +86,31 @@ const existeRegistroHabiVencido=  async (req, res, next) => {
 }
 
 
+const RegistroHabitacionesControlFechas=  async (req, res, next) => {
+  
+    
+               const registrada = req.datosres;
+               const fecha = new Date();
+               const dia = fecha.getDate();
+               const mes = fecha.getMonth() + 1;
+               const anio = fecha.getFullYear();
+               const hoy = funcion.hoy(dia, mes,anio);
 
-module.exports = { existeHabitacionPorIdRegistro, existeRegistrohabByID, existeRegistroHabiPorIdMostrar, existeRegistroHabiVencido}
+
+       
+       if((funcion.diferencia(registrada.FechaIngreso,hoy))<0)
+       {
+        return res.status(400).json({error:"Fecha ingreso menor a fecha actual "});
+
+       } 
+          next()
+
+
+        
+   
+}
+
+
+
+
+module.exports = { RegistroHabitacionesControlFechas,existeHabitacionPorIdRegistro, existeRegistrohabByID, existeRegistroHabiPorIdMostrar, existeRegistroHabiVencido}
