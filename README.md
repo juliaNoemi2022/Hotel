@@ -131,13 +131,15 @@ El modelo de datos posee 7 tablas
 
 ### cURL para
 
+### cURL para
+
 * Crear Cliente
 
 ```
 curl --location 'http://localhost:3001/clientes'\
 --header 'Content-Type: application/json' \
 --data '{
-            "dni": 123578,
+            "dni": 12352078,
             "nombre": "Julia",
             "apellido": "Avalos", 
             "fechaNacimiento": "1971-10-20", 
@@ -146,6 +148,23 @@ curl --location 'http://localhost:3001/clientes'\
         }'
 
 ```
+
+```
+curl --location 'http://localhost:3001/clientes'\
+--header 'Content-Type: application/json' \
+--data '{
+            "dni": 2357,
+            "nombre": "Omar",
+            "apellido": "Bazar", 
+            "fechaNacimiento": "1969-05-10", 
+            "email": "leo@yahoo.com",
+            "tarjeta": 123
+        }'
+
+```
+
+
+
 * Crear Habitaciones
 
 ```
@@ -158,32 +177,76 @@ curl --location 'http://localhost:3001/Habitaciones' \
             "Precio": 15000
         }'
 ```
+```
+curl --location 'http://localhost:3001/Habitaciones' \
+--header 'Content-Type: application/json' \
+--data '{
+            "numero": 8,
+            "Estrellas": 2,
+            "CantPersonas": 3, 
+            "Precio": 20000
+        }'
+```
+
+
+
+* Crear Productos
+
+```
+curl --location 'http://localhost:3001/productos/' \
+--header 'Content-Type: application/json' \
+--data '{
+            "Producto": "Cena",
+            "Precio": 1000,        
+            "Habilitado": true
+        }'
+```
+
+```
+curl --location 'http://localhost:3001/productos/' \
+--header 'Content-Type: application/json' \
+--data '{
+            "Producto": "Spa",
+            "Precio": 50000000,        
+            "Habilitado": true
+        }'
+```
+
 
 
 
 * Crear Reservas de Habitaciones
 ```
-curl --location 'http://localhost:3001/Reservas/Habitaciones/8' \
+curl --location 'http://localhost:3001/Reservas/Habitaciones/1' \
 --header 'Content-Type: application/json' \
 --data '{
-            "CantPersonas": 3,
-            "FechaIngreso": "2024-05-17", "CantDias": 10,
-            "FechaEgreso": "2024-05-25",
-            "Precio": 200000
-        }'
+    "dni":12352078,
+    "CantPersonas": 2,
+    "FechaIngreso": "2024-06-25",
+    "CantDias": 7,
+    "FechaEgreso": "2024-06-27",
+    "Precio": 180000
+}'
 ```
+
+
 
 * Crear Reservas Productos
 
 ```
-curl --location 'http://localhost:3001/Reservas/Productos/5' \
+curl --location 'http://localhost:3001/Reservas/Productos/2' \
 --header 'Content-Type: application/json' \
 --data '{
+            "dni":2357, 
             "CantPersonas": 3,
-            "FechaIngreso": "2024-05-17", "CantDias": 10,
-            "FechaEgreso": "2024-05-25", "Precio": 200000
+            "FechaReserva": "2024-06-19",
+            "Precio": 15000
+        
         }'
 ```
+
+
+
 
 * CheckIn Registros Habitaciones por ID
 
@@ -200,6 +263,20 @@ curl --location 'http://localhost:3001/Registros/habitaciones/checkin/488' \
 ```
 
 
+```
+curl --location 'http://localhost:3001/Registros/habitaciones/checkin/1' \
+--header 'Content-Type: application/json' \
+--data '{
+            "CantPersonas": 3,
+            "FechaIngreso": "2024-05-17",
+            "CantDias": 10,
+            "FechaEgreso": "2024-05-25",
+            "Precio": 200000
+        }'
+```
+
+
+
 * CheckIn Registros Productos By ID
 
 ```
@@ -214,6 +291,21 @@ curl --location 'http://localhost:3001/Registros/Productos/checkin/14' \
         }'
 ```
  
+```
+curl --location 'http://localhost:3001/Registros/Productos/checkin/3' \
+--header 'Content-Type: application/json' \
+--data '{
+           "CantPersonas": 3,
+           "FechaIngreso": "2024-06-20",
+           "CantDias": 10,
+           "FechaEgreso": "2024-06-25",
+           "Precio": 150000
+        }'
+```
+
+
+
+
 * Modificar Reservas Habitaciones By ID
 ```
 curl --location --request PUT 'http://localhost:3001/reservas/habitaciones/8' \
@@ -242,31 +334,57 @@ curl --location --request PUT 'http://localhost:3001/reservas/productos/5' \
 ```
 
 
+
+
 * Modificar Registros Productos By ID
 
 ```
 curl --location --request PUT 'http://localhost:3001/Registros/Productos/14' \
 --header 'Content-Type: application/json' \
 --data '{
-    "CantPersonas": 4,
-    "FechaIngreso": "2024-05-16",
-    "CantDias": 12,
-    "FechaEgreso": "2024-05-28",
-    "Precio": 250000
-}'
+    
+            "CantPersonas": 4,
+            "FechaReserva": "2024-06-19",
+            "Precio": 250000
+        
+    }'
 
 ```
+
+```
+curl --location --request PUT 'http://localhost:3001/Registros/Productos/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    
+            "CantPersonas": 2,
+            "FechaReserva": "2024-06-20",
+            "Precio": 200000
+        
+    }'
+
+```
+
+
+
+
 * CheckOut Registros Habitaciones By ID
 ```
 curl --location --request PUT 'http://localhost:3001/Registros/habitaciones/checkout/488' \
 --header 'Content-Type: application/json' \
 --data '{
-    "FechaCheckOut": "2024-05-25"
+   
+           "CantPersonas": 3,
+           "FechaIngreso": "2024-06-19",
+           "FechaEgreso": "2024-06-23",
+           "Precio": 200000
 }'
 
-
-
 ```
+
+
+
+
+
 
 * Modificar Registros Habitaciones By ID
 
@@ -275,9 +393,21 @@ curl --location --request PUT 'http://localhost:3001/Registros/habitaciones/488'
 --header 'Content-Type: application/json' \
 --data '{
     "CantPersonas": 2,
-    "FechaIngreso": "2024-05-18",
+    "FechaIngreso": "2024-06-19",
     "CantDias": 5,
-    "FechaEgreso": "2024-05-23",
+    "FechaEgreso": "2024-06-23",
     "Precio": 150000
 }'
+```
+
+```
+curl --location --request PUT 'http://localhost:3001/Registros/habitaciones/1' \
+--header 'Content-Type: application/json' \
+--data '{
+            "CantPersonas": 2,
+            "FechaIngreso": "2024-06-19",
+            "CantDias": 5,
+            "FechaEgreso": "2024-06-23",
+            "Precio": 150000
+    }
 ```
