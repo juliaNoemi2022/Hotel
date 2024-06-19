@@ -152,15 +152,6 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \"id\": 1,\r\n        \"Producto\": \"Cena\",\r\n        \"Precio\": 10000,\r\n        \"Habilitado\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "localhost:3001/productos",
 							"host": [
@@ -672,7 +663,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n        \"CantPersonas\": 3,\r\n        \"FechaIngreso\": \"2024-05-17\",\r\n        \"CantDias\": 10,\r\n        \"FechaEgreso\": \"2024-05-25\",\r\n        \"Precio\": 200000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -680,7 +671,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/Registros/habitaciones/checkin/50",
+							"raw": "localhost:3001/Registros/habitaciones/checkin/488",
 							"host": [
 								"localhost"
 							],
@@ -689,7 +680,7 @@
 								"Registros",
 								"habitaciones",
 								"checkin",
-								"50"
+								"488"
 							]
 						}
 					},
@@ -795,7 +786,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n        \"CantPersonas\": 3,\r\n        \"FechaIngreso\": \"2024-05-17\",\r\n        \"CantDias\": 10,\r\n        \"FechaEgreso\": \"2024-05-25\",\r\n        \"Precio\": 200000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -803,7 +794,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/Registros/habitaciones/checkout/38",
+							"raw": "localhost:3001/Registros/habitaciones/checkout/99",
 							"host": [
 								"localhost"
 							],
@@ -812,7 +803,7 @@
 								"Registros",
 								"habitaciones",
 								"checkout",
-								"38"
+								"99"
 							]
 						}
 					},
